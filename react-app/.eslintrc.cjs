@@ -18,19 +18,15 @@ module.exports = {
     ],
   
     "@typescript-eslint/no-explicit-any": "error",
-    "implicit-arrow-linebreak": "off",
-    "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "error",
-    "import/extensions": [
+    "@typescript-eslint/ban-types": [
       "error",
-      "ignorePackages",
-      { 
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
+      {
+        "extendDefaults": true,
+        "types": {
+          "{}": false
+        }
+      }],
   },
 
   settings: {

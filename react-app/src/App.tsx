@@ -27,7 +27,13 @@ class App extends React.Component {
   };
 
   componentDidMount = () => {
-    this.getSearch();
+    if (localStorage.getItem("search")) {
+      this.setState({ searchValue: localStorage.getItem("search") }, () => {
+        this.getSearch();
+      });
+    } else {
+      this.getSearch();
+    }
   };
 
   handleSearch = (query: string) => {

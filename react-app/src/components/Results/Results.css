@@ -19,3 +19,8 @@
 .results-info {
     margin: 0px;
 }
+
+.not-found-message {
+    font-size: 35px;
+    color: brown;
+}

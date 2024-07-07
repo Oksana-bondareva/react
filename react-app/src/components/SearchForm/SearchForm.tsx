@@ -16,7 +16,6 @@ class SearchForm extends Component<SearchFormState> {
 
   handleSearch = () => {
     event?.preventDefault();
-    localStorage.setItem("search", this.state.searchQuery);
     this.props.onSearch(this.state.searchQuery);
   };
 

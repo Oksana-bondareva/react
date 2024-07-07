@@ -18,7 +18,7 @@ type ResultItems = {
 
 export class Results extends Component<ResultItems> {
   render() {
-    return (
+    return this.props.data.length ? (
       <div className="results-container">
         {this.props.data.map(
           (item: {
@@ -46,6 +46,8 @@ export class Results extends Component<ResultItems> {
           },
         )}
       </div>
+    ) : (
+      <div className="not-found-message">Oops, nothing was found!</div>
     );
   }
 }

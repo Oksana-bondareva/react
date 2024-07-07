@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import SearchForm from "./components/SearchForm";
+import SearchForm from "./components/SearchForm/SearchForm";
 
 class App extends React.Component {
   render() {
@@ -9,6 +9,7 @@ class App extends React.Component {
         <section>
           <SearchForm />
         </section>
+        <section></section>
       </div>
     );
   }

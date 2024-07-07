@@ -2,22 +2,23 @@ import { Component, ChangeEvent } from "react";
 import "./SearchForm.css";
 
 interface SearchFormState {
-  searchQuery: string;
+  onSearch: (value: string) => void;
 }
 
-class SearchForm extends Component<{}, SearchFormState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      searchQuery: "",
-    };
-  }
+class SearchForm extends Component<SearchFormState> {
+  state = {
+    searchQuery: "",
+  };
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchQuery: event.target.value });
   };
 
-  handleSearch = () => {};
+  handleSearch = () => {
+    event?.preventDefault();
+    localStorage.setItem("search", this.state.searchQuery);
+    this.props.onSearch(this.state.searchQuery);
+  };
 
   render() {
     return (

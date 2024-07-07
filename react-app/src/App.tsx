@@ -10,7 +10,7 @@ class App extends React.Component {
     isLoading: false,
   };
 
-  componentDidMount = async () => {
+  getSearch = async () => {
     try {
       this.setState({
         isLoading: true,
@@ -26,17 +26,27 @@ class App extends React.Component {
     }
   };
 
+  componentDidMount = () => {
+    this.getSearch();
+  };
+
+  handleSearch = (query: string) => {
+    event?.preventDefault();
+    localStorage.setItem("search", query);
+    this.setState({ searchValue: query }, () => {
+      this.getSearch();
+    });
+  };
+
   render() {
     return (
       <div>
         <section>
-          <SearchForm />
+          <SearchForm onSearch={this.handleSearch} />
         </section>
         <section>
           {this.state.isLoading ? (
-            <div className="loading">
-              Loading...
-            </div>
+            <div className="loading">Loading...</div>
           ) : (
             <Results data={this.state.dataApi} />
           )}

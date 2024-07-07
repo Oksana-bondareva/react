@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint src/",
+    "lint": "eslint --fix",
     "preview": "vite preview",
     "format:fix": "prettier --write src/**/*.tsx",
     "ci:format": "prettier --check src/**/*.tsx",
@@ -31,7 +31,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "husky": "^8.0.0",
     "prettier": "3.3.2",
-    "typescript": "^5.2.2",
+    "typescript": "^5.5.3",
     "vite": "^5.3.1"
   }
 }

@@ -1,6 +1,9 @@
 .search-form {
     display: flex;
     gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    height: 20%;
 }
 
 .search-form__input {
@@ -12,7 +15,7 @@
 }
 
 .search-form__button {
-    width: 10vw;
+    width: 100px;
     border: 3px solid rgb(63, 5, 5);
     background-color: rgb(230, 147, 147);
     font-size: 18px;

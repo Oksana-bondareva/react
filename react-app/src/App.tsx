@@ -44,10 +44,19 @@ class App extends React.Component {
     });
   };
 
+  errorButtonHandler = () => {
+    this.setState(() => {
+      throw new Error("Oops, something went wrong...");
+    });
+  };
+
   render() {
     return (
       <div>
-        <section>
+        <section className="search-section">
+          <button className="error-button" onClick={this.errorButtonHandler}>
+            ERROR
+          </button>
           <SearchForm onSearch={this.handleSearch} />
         </section>
         <section>

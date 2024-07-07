@@ -16,7 +16,7 @@ class SearchForm extends Component<SearchFormState> {
 
   handleSearch = () => {
     event?.preventDefault();
-    //this.props.onSearch(this.state.searchQuery);
+    this.props.onSearch(this.state.searchQuery);
   };
 
   render() {

@@ -7,16 +7,20 @@ class App extends React.Component {
   state = {
     searchValue: "",
     dataApi: [],
+    isLoading: false,
   };
 
   componentDidMount = async () => {
     try {
+      this.setState({
+        isLoading: true,
+      });
       const response = await fetch(
         `https://swapi.dev/api/people/?search=${this.state.searchValue}&page=1
         `,
       );
       const data = await response.json();
-      this.setState({ dataApi: data.results });
+      this.setState({ dataApi: data.results, isLoading: false });
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +33,13 @@ class App extends React.Component {
           <SearchForm />
         </section>
         <section>
-          <Results data={this.state.dataApi} />
+          {this.state.isLoading ? (
+            <div className="loading">
+              Loading...
+            </div>
+          ) : (
+            <Results data={this.state.dataApi} />
+          )}
         </section>
       </div>
     );

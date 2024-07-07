@@ -21,18 +21,21 @@ export class Results extends Component<ResultItems> {
     return this.props.data.length ? (
       <div className="results-container">
         {this.props.data.map(
-          (item: {
-            name: string;
-            mass: string;
-            height: string;
-            hair_color: string;
-            skin_color: string;
-            eye_color: string;
-            birth_year: string;
-            gender: string;
-          }) => {
+          (
+            item: {
+              name: string;
+              mass: string;
+              height: string;
+              hair_color: string;
+              skin_color: string;
+              eye_color: string;
+              birth_year: string;
+              gender: string;
+            },
+            index,
+          ) => {
             return (
-              <div className="results-card">
+              <div className="results-card" key={index}>
                 <p className="results-info">Name: {item.name}</p>
                 <p className="results-info">Mass: {item.mass}</p>
                 <p className="results-info">Height: {item.height}</p>

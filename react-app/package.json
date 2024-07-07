@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "format:fix": "prettier --write src/**/*.tsx",
     "ci:format": "prettier --check src/**/*.tsx",
-    "prepare": "husky"
+    "prepare": "cd .. && husky install [child-folder]/.husky"
   },
   "dependencies": {
     "react": "^18.3.1",

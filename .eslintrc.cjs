@@ -10,13 +10,14 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', "@typescript-eslint", "import"],
+  plugins: ['react-refresh', "@typescript-eslint", "import", "react-compiler"],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   
+    "react-compiler/react-compiler": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/ban-types": [

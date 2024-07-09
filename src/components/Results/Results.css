@@ -1,0 +1,26 @@
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.results-card {
+    width: 250px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid brown;
+    padding: 15px;
+    gap: 5px;
+    background-color: rgb(243, 185, 185);
+}
+
+.results-info {
+    margin: 0px;
+}
+
+.not-found-message {
+    font-size: 35px;
+    color: brown;
+}

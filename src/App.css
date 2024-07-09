@@ -1,0 +1,28 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading {
+  font-size: 35px;
+  color: red;
+}
+
+.error-button {
+  width: 100px;
+  height: 50px;
+    background-color: rgb(48, 25, 25);
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.search-section {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}

@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import SearchForm from "./components/SearchForm/SearchForm";
-import { Results } from "./components/Results/Results";
+import Results from "./components/Results/Results";
 
 class App extends React.Component {
   state = {

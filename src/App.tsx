@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import SearchForm from "./components/SearchForm/SearchForm";
 import Results from "./components/Results/Results";
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState(
@@ -60,7 +61,7 @@ const App = () => {
       </section>
       <section>
         {isLoading ? (
-          <div className="loading">Loading...</div>
+          <Loader />
         ) : (
           <div className="results-wrapper">
             <Results data={dataApi} />

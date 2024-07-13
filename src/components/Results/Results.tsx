@@ -14,6 +14,9 @@ const Results: React.FC<ResultItems> = ({ data }) => {
 
   return data.length ? (
     <div className="results">
+      <div className="results-overlay" onClick={() => {
+        setShowDetails(false);
+      }}></div>
       <div className="results-container">
         {data.map((item, index) => (
           <div

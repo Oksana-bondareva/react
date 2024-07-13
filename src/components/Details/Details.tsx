@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ResultItem } from "../../utils/interfaces";
 import "./Details.css";
+import Loader from "../Loader/Loader";
 
 type detailsType = {
   idDetails: string;
@@ -8,15 +9,18 @@ type detailsType = {
 
 const Details: React.FC<detailsType> = ({ idDetails }) => {
   const [data, setData] = useState<ResultItem | null>(null);
+  const [isLoader, setIsLoader] = useState(false);
 
   useEffect(() => {
     const getDetails = async () => {
       try {
+        setIsLoader(true);
         const response = await fetch(
           `https://swapi.dev/api/people/${idDetails}`,
         );
         const data = await response.json();
         setData(data);
+        setIsLoader(false);
         return data;
       } catch (error) {
         console.log(error);
@@ -26,8 +30,9 @@ const Details: React.FC<detailsType> = ({ idDetails }) => {
   }, [idDetails]);
 
   return data ? (
-    <div className="details-container">
-      <div>
+    <div className="details-wrapper">
+       {!isLoader ? 
+      (<div> <div className="details-container">
         <p className="results-info">Name: {data.name}</p>
         <p className="results-info">Mass: {data.mass}</p>
         <p className="results-info">Height: {data.height}</p>
@@ -44,10 +49,10 @@ const Details: React.FC<detailsType> = ({ idDetails }) => {
         }}
       >
         Close
-      </button>
+      </button> </div>) : (<Loader />)}
     </div>
   ) : (
-    ""
+    ''
   );
 };
 

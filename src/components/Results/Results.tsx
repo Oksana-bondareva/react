@@ -1,36 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Results.css";
-
-interface ResultItem {
-  name: string;
-  mass: string;
-  height: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-}
-
-interface ResultItems {
-  data: ResultItem[];
-}
+import { ResultItems } from "../../utils/interfaces";
+import Details from "../Details/Details";
 
 const Results: React.FC<ResultItems> = ({ data }) => {
+  const [selectedId, setSelectedId] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
+
+  const handleItemClick = (id: string) => {
+    setSelectedId(id);
+    setShowDetails(true);
+  };
+
   return data.length ? (
-    <div className="results-container">
-      {data.map((item, index) => (
-        <div className="results-card" key={index}>
-          <p className="results-info">Name: {item.name}</p>
-          <p className="results-info">Mass: {item.mass}</p>
-          <p className="results-info">Height: {item.height}</p>
-          <p className="results-info">Hair color: {item.hair_color}</p>
-          <p className="results-info">Skin color: {item.skin_color}</p>
-          <p className="results-info">Eye color: {item.eye_color}</p>
-          <p className="results-info">Birth year: {item.birth_year}</p>
-          <p className="results-info">Gender: {item.gender}</p>
-        </div>
-      ))}
+    <div className="results">
+      <div className="results-container">
+        {data.map((item, index) => (
+          <div
+            className="results-card"
+            onClick={() =>
+              handleItemClick(item.url.slice(29, item.url.lastIndexOf("/")))
+            }
+            key={index}
+          >
+            <p className="results-info">Name: {item.name}</p>
+          </div>
+        ))}
+      </div>
+      <div>{showDetails && <Details idDetails={selectedId} />}</div>
     </div>
   ) : (
     <div className="not-found-message">Oops, nothing was found!</div>

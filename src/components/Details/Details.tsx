@@ -31,28 +31,34 @@ const Details: React.FC<detailsType> = ({ idDetails }) => {
 
   return data ? (
     <div className="details-wrapper">
-       {!isLoader ? 
-      (<div> <div className="details-container">
-        <p className="results-info">Name: {data.name}</p>
-        <p className="results-info">Mass: {data.mass}</p>
-        <p className="results-info">Height: {data.height}</p>
-        <p className="results-info">Hair color: {data.hair_color}</p>
-        <p className="results-info">Skin color: {data.skin_color}</p>
-        <p className="results-info">Eye color: {data.eye_color}</p>
-        <p className="results-info">Birth year: {data.birth_year}</p>
-        <p className="results-info">Gender: {data.gender}</p>
-      </div>
-      <button
-        className="details-button"
-        onClick={() => {
-          setData(null);
-        }}
-      >
-        Close
-      </button> </div>) : (<Loader />)}
+      {!isLoader ? (
+        <div>
+          {" "}
+          <div className="details-container">
+            <p className="results-info">Name: {data.name}</p>
+            <p className="results-info">Mass: {data.mass}</p>
+            <p className="results-info">Height: {data.height}</p>
+            <p className="results-info">Hair color: {data.hair_color}</p>
+            <p className="results-info">Skin color: {data.skin_color}</p>
+            <p className="results-info">Eye color: {data.eye_color}</p>
+            <p className="results-info">Birth year: {data.birth_year}</p>
+            <p className="results-info">Gender: {data.gender}</p>
+          </div>
+          <button
+            className="details-button"
+            onClick={() => {
+              setData(null);
+            }}
+          >
+            Close
+          </button>{" "}
+        </div>
+      ) : (
+        <Loader />
+      )}
     </div>
   ) : (
-    ''
+    ""
   );
 };
 

@@ -3,8 +3,11 @@ import "./App.css";
 import SearchForm from "./components/SearchForm/SearchForm";
 import Results from "./components/Results/Results";
 import Loader from "./components/Loader/Loader";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [searchValue, setSearchValue] = useState(
     localStorage.getItem("search") || "",
   );
@@ -27,14 +30,22 @@ const App = () => {
   };
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, []);
+
+  useEffect(() => {
     setSearchValue(localStorage.getItem("search") || "");
+    console.log(currentPage);
+    const currentPageFromUrl = Number(location.pathname.split("/")[2]) || 1;
+    setCurrentPage(currentPageFromUrl);
     getSearch();
-  }, [searchValue, currentPage]);
+  }, [searchValue, currentPage, location.pathname]);
 
   const handleSearch = (query: string) => {
     event?.preventDefault();
     localStorage.setItem("search", query);
     setSearchValue(query);
+    navigate(`/`);
   };
 
   const errorButtonHandler = () => {
@@ -44,11 +55,13 @@ const App = () => {
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      navigate(`/search/${currentPage - 1}`);
     }
   };
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
+    navigate(`/search/${currentPage + 1}`);
   };
 
   return (
@@ -65,22 +78,18 @@ const App = () => {
         ) : (
           <div className="results-wrapper">
             <Results data={dataApi} />
-            {localStorage.getItem("search") === "" || "" ? (
-              <div className="pagination-pages">
-                <button
-                  className="pagination-button"
-                  onClick={handlePreviousPage}
-                >
-                  Prev
-                </button>
-                <span>Page {currentPage}</span>
-                <button className="pagination-button" onClick={handleNextPage}>
-                  Next
-                </button>
-              </div>
-            ) : (
-              ""
-            )}
+            <div className="pagination-pages">
+              <button
+                className="pagination-button"
+                onClick={handlePreviousPage}
+              >
+                Prev
+              </button>
+              <span>Page {currentPage}</span>
+              <button className="pagination-button" onClick={handleNextPage}>
+                Next
+              </button>
+            </div>
           </div>
         )}
       </section>

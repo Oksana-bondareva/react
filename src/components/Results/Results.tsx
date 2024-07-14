@@ -3,9 +3,11 @@ import "./Results.css";
 import { ResultItems } from "../../utils/interfaces";
 import Details from "../Details/Details";
 
+export let showDetailsFlag: boolean;
+
 const Results: React.FC<ResultItems> = ({ data }) => {
   const [selectedId, setSelectedId] = useState("");
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState(showDetailsFlag);
 
   const handleItemClick = (id: string) => {
     setSelectedId(id);
@@ -14,9 +16,12 @@ const Results: React.FC<ResultItems> = ({ data }) => {
 
   return data.length ? (
     <div className="results">
-      <div className="results-overlay" onClick={() => {
-        setShowDetails(false);
-      }}></div>
+      <div
+        className="results-overlay"
+        onClick={() => {
+          setShowDetails(false);
+        }}
+      ></div>
       <div className="results-container">
         {data.map((item, index) => (
           <div

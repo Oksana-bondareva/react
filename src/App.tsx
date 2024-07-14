@@ -45,6 +45,7 @@ const App = () => {
     event?.preventDefault();
     localStorage.setItem("search", query);
     setSearchValue(query);
+    setCurrentPage(1);
     navigate(`/`);
   };
 

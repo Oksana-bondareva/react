@@ -9,8 +9,7 @@
     "strict": true,
     "noEmit": true,
     "types": ["node", "jest", "@testing-library/jest-dom"],
-    "jsx": "react",
-    "jsxFactory": "tsx"
+    "jsx": "react"
   },
   "include": ["vite.config.ts"]
 }

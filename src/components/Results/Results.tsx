@@ -24,6 +24,7 @@ const Results: React.FC<ResultItems> = ({ data }) => {
         {data.map((item, index) => (
           <div
             className="results-card"
+            data-testid="character-card"
             onClick={() =>
               handleItemClick(item.url.slice(29, item.url.lastIndexOf("/")))
             }

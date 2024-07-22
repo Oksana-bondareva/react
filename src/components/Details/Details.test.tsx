@@ -1,10 +1,32 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { vi } from "vitest";
 import Details from "./Details";
+
+global.fetch = vi.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () =>
+      Promise.resolve({
+        name: "Luke Skywalker",
+        mass: "77",
+        height: "172",
+        hair_color: "blond",
+        skin_color: "fair",
+        eye_color: "blue",
+        birth_year: "19BBY",
+        gender: "male",
+      }),
+  }),
+) as unknown as typeof fetch;
 
 describe("Details component", () => {
   it("Displays the details correctly", async () => {
-    const idDetails = "1";
-    render(<Details idDetails={idDetails} />);
+    render(
+      <BrowserRouter>
+        <Details />
+      </BrowserRouter>,
+    );
 
     await screen.findByText("Name: Luke Skywalker");
 
@@ -13,9 +35,12 @@ describe("Details component", () => {
     expect(screen.getByText("Close")).toBeInTheDocument();
   });
 
-  it("Closes the details when the button is clicked Close", async () => {
-    const idDetails = "1";
-    render(<Details idDetails={idDetails} />);
+  it("Closes the details when the button is clicked", async () => {
+    render(
+      <BrowserRouter>
+        <Details />
+      </BrowserRouter>,
+    );
 
     await screen.findByText("Name: Luke Skywalker");
 

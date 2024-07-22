@@ -35,11 +35,10 @@ const App = () => {
 
   useEffect(() => {
     setSearchValue(localStorage.getItem("search") || "");
-    console.log(currentPage);
     const currentPageFromUrl = Number(location.pathname.split("/")[2]) || 1;
     setCurrentPage(currentPageFromUrl);
     getSearch();
-  }, [searchValue, currentPage, location.pathname]);
+  }, [searchValue, currentPage]);
 
   const handleSearch = (query: string) => {
     event?.preventDefault();

@@ -29,7 +29,3 @@ describe("Main component", () => {
     expect(screen.getByText("Search")).toBeInTheDocument();
   });
 });
-
-
-
-

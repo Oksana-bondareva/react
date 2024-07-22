@@ -19,6 +19,8 @@
     font-size: 25px;
     cursor: pointer;
     z-index: 100;
+    text-decoration: none;
+    color: rgb(69, 19, 19);
 }
 
 .results-info {

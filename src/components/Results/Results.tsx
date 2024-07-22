@@ -1,43 +1,36 @@
-import React, { useState } from "react";
 import "./Results.css";
 import { ResultItems } from "../../utils/interfaces";
-import Details from "../Details/Details";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Results: React.FC<ResultItems> = ({ data }) => {
-  const [selectedId, setSelectedId] = useState("");
-  const [showDetails, setShowDetails] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleItemClick = (id: string) => {
-    setSelectedId(id);
-    setShowDetails(true);
-  };
-
-  return data.length ? (
+  return (
     <div className="results">
       <div
         className="results-overlay"
         onClick={() => {
-          setShowDetails(false);
+          navigate(`/search/${location.pathname.split("/")[2] || 1}`);
         }}
       ></div>
       <div className="results-container">
         {data.map((item, index) => (
-          <div
+          <Link
             className="results-card"
             data-testid="character-card"
-            onClick={() =>
-              handleItemClick(item.url.slice(29, item.url.lastIndexOf("/")))
-            }
             key={index}
+            to={`/search/${location.pathname.split("/")[2] || 1}/details/${item.url.slice(29, item.url.lastIndexOf("/"))}`}
           >
             <p className="results-info">Name: {item.name}</p>
-          </div>
+          </Link>
         ))}
+        {!data.length && !location.pathname.includes(`/details/`) && (
+          <div className="not-found-message">Oops, nothing was found!</div>
+        )}
       </div>
-      <div>{showDetails && <Details idDetails={selectedId} />}</div>
+      <Outlet />
     </div>
-  ) : (
-    <div className="not-found-message">Oops, nothing was found!</div>
   );
 };
 

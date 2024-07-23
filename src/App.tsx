@@ -4,41 +4,27 @@ import SearchForm from "./components/SearchForm/SearchForm";
 import Results from "./components/Results/Results";
 import Loader from "./components/Loader/Loader";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useGetPeopleQuery } from "./utils/apiSlice";
 
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchValue, setSearchValue] = useState(
-    localStorage.getItem("search") || "",
-  );
-  const [dataApi, setDataApi] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState(localStorage.getItem("search") || "");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const getSearch = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        `https://swapi.dev/api/people/?search=${searchValue}&page=${currentPage}`,
-      );
-      const data = await response.json();
-      setDataApi(data.results);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { data: dataApi, error, isLoading } = useGetPeopleQuery({ search: searchValue, page: currentPage });
 
   useEffect(() => {
     setCurrentPage(1);
-  }, []);
+    if (error) {
+      console.log(error);
+    }
+  }, [error]);
 
   useEffect(() => {
     setSearchValue(localStorage.getItem("search") || "");
     const currentPageFromUrl = Number(location.pathname.split("/")[2]) || 1;
     setCurrentPage(currentPageFromUrl);
-    getSearch();
-  }, [searchValue, currentPage]);
+  }, [location.pathname]);
 
   const handleSearch = (query: string) => {
     event?.preventDefault();
@@ -77,12 +63,9 @@ const App = () => {
           <Loader />
         ) : (
           <div className="results-wrapper">
-            <Results data={dataApi} />
+            <Results data={dataApi?.results || []} />
             <div className="pagination-pages">
-              <button
-                className="pagination-button"
-                onClick={handlePreviousPage}
-              >
+              <button className="pagination-button" onClick={handlePreviousPage}>
                 Prev
               </button>
               <span>Page {currentPage}</span>

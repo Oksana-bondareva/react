@@ -1,41 +1,30 @@
-import { useEffect, useState } from "react";
-import { ResultItem } from "../../utils/interfaces";
-import "./Details.css";
-import Loader from "../Loader/Loader";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useGetPersonByIdQuery } from '../../utils/apiSlice';
+import './Details.css';
+import Loader from '../Loader/Loader';
 
 const Details = () => {
-  const [data, setData] = useState<ResultItem | null>(null);
-  const [isLoader, setIsLoader] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const id = location.pathname.split('/').pop() || '';
+  const { data, error, isLoading } = useGetPersonByIdQuery(id);
 
   useEffect(() => {
-    const getDetails = async () => {
-      try {
-        setIsLoader(true);
-        const response = await fetch(
-          `https://swapi.dev/api/people/${location.pathname.split("/").pop()}`,
-        );
-        const data = await response.json();
-        setData(data);
-        setIsLoader(false);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getDetails();
-  }, [location.pathname]);
+    if (error) {
+      console.log(error);
+    }
+  }, [error]);
 
   const handleClose = () => {
-    setData(null);
     navigate(-1);
   };
 
-  return data ? (
+  return (
     <div className="details-wrapper">
-      {!isLoader ? (
+      {isLoading ? (
+        <Loader />
+      ) : data ? (
         <div>
           <div className="details-container">
             <p className="results-info">Name: {data.name}</p>
@@ -52,11 +41,9 @@ const Details = () => {
           </button>
         </div>
       ) : (
-        <Loader />
+        <p>No data available</p>
       )}
     </div>
-  ) : (
-    ""
   );
 };
 

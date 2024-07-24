@@ -5,6 +5,8 @@ import Results from "./components/Results/Results";
 import Loader from "./components/Loader/Loader";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useGetPeopleQuery } from "./utils/apiSlice";
+import { useTheme } from "./components/Theme/ThemeContext";
+import ThemeToggle from "./components/Theme/ThemeToggle";
 
 const App = () => {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ const App = () => {
     error,
     isLoading,
   } = useGetPeopleQuery({ search: searchValue, page: currentPage });
+  const { theme } = useTheme();
 
   useEffect(() => {
     setCurrentPage(1);
@@ -57,12 +60,13 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className={theme}>
       <section className="search-section">
         <button className="error-button" onClick={errorButtonHandler}>
           ERROR
         </button>
         <SearchForm onSearch={handleSearch} />
+        <ThemeToggle />
       </section>
       <section>
         {isLoading ? (

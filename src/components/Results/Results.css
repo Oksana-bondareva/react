@@ -40,8 +40,8 @@
 
 .results-overlay {
     position: absolute;
-    top: 0;
+    top: -110px;
     left: -300px;
-    width: 130vw;
-    height: 200vh;
+    width: 100vw;
+    height: 240vh;
 }

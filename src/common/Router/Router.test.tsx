@@ -12,6 +12,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import rootReducer, { RootState } from "../../common/RootReducer/rootReducer";
 import { apiSlice } from "../../utils/apiSlice";
+import { ThemeProvider } from "../../components/Theme/ThemeContext";
 
 const renderWithProviders = (
   ui: React.ReactElement,
@@ -30,9 +31,11 @@ const renderWithProviders = (
 describe("Router", () => {
   test("renders App component for / route", () => {
     renderWithProviders(
-      <MemoryRouter initialEntries={["/"]}>
-        <App />
-      </MemoryRouter>,
+      <ThemeProvider>
+        <MemoryRouter initialEntries={["/"]}>
+          <App />
+        </MemoryRouter>
+      </ThemeProvider>,
     );
 
     expect(screen.getByText("Search")).toBeInTheDocument();
@@ -50,11 +53,13 @@ describe("Router", () => {
 
   test("renders App component for /search route", () => {
     renderWithProviders(
-      <MemoryRouter initialEntries={["/search"]}>
-        <Routes>
-          <Route path="/search" element={<App />} />
-        </Routes>
-      </MemoryRouter>,
+      <ThemeProvider>
+        <MemoryRouter initialEntries={["/search"]}>
+          <Routes>
+            <Route path="/search" element={<App />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>,
     );
 
     expect(screen.getByText("Search")).toBeInTheDocument();

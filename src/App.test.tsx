@@ -7,6 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { apiSlice } from "./utils/apiSlice";
 import rootReducer, { RootState } from "./common/RootReducer/rootReducer";
+import { ThemeProvider } from "./components/Theme/ThemeContext";
 
 const renderWithProviders = (
   ui: React.ReactElement,
@@ -36,11 +37,13 @@ describe("Main component", () => {
 
   test("navigate to different page to click", () => {
     renderWithProviders(
-      <MemoryRouter initialEntries={["/?page=3"]}>
-        <Routes>
-          <Route path="/" element={<App />} />
-        </Routes>
-      </MemoryRouter>,
+      <ThemeProvider>
+        <MemoryRouter initialEntries={["/?page=3"]}>
+          <Routes>
+            <Route path="/" element={<App />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>,
     );
 
     fireEvent.click(screen.getByText("Search"));

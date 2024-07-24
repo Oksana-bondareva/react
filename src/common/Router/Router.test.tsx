@@ -8,10 +8,28 @@ import {
 import App from "../../App";
 import NotFound from "../NotFound/NotFound";
 import router from "./Router";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import rootReducer, { RootState } from "../../common/RootReducer/rootReducer";
+import { apiSlice } from "../../utils/apiSlice";
+
+const renderWithProviders = (
+  ui: React.ReactElement,
+  preloadedState: Partial<RootState> = {},
+) => {
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(apiSlice.middleware),
+    preloadedState,
+  });
+
+  return render(<Provider store={store}>{ui}</Provider>);
+};
 
 describe("Router", () => {
   test("renders App component for / route", () => {
-    render(
+    renderWithProviders(
       <MemoryRouter initialEntries={["/"]}>
         <App />
       </MemoryRouter>,
@@ -31,7 +49,7 @@ describe("Router", () => {
   });
 
   test("renders App component for /search route", () => {
-    render(
+    renderWithProviders(
       <MemoryRouter initialEntries={["/search"]}>
         <Routes>
           <Route path="/search" element={<App />} />

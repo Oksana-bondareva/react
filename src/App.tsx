@@ -9,9 +9,15 @@ import { useGetPeopleQuery } from "./utils/apiSlice";
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchValue, setSearchValue] = useState(localStorage.getItem("search") || "");
+  const [searchValue, setSearchValue] = useState(
+    localStorage.getItem("search") || "",
+  );
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: dataApi, error, isLoading } = useGetPeopleQuery({ search: searchValue, page: currentPage });
+  const {
+    data: dataApi,
+    error,
+    isLoading,
+  } = useGetPeopleQuery({ search: searchValue, page: currentPage });
 
   useEffect(() => {
     setCurrentPage(1);
@@ -65,7 +71,10 @@ const App = () => {
           <div className="results-wrapper">
             <Results data={dataApi?.results || []} />
             <div className="pagination-pages">
-              <button className="pagination-button" onClick={handlePreviousPage}>
+              <button
+                className="pagination-button"
+                onClick={handlePreviousPage}
+              >
                 Prev
               </button>
               <span>Page {currentPage}</span>

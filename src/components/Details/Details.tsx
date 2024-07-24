@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useGetPersonByIdQuery } from '../../utils/apiSlice';
-import './Details.css';
-import Loader from '../Loader/Loader';
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useGetPersonByIdQuery } from "../../utils/apiSlice";
+import "./Details.css";
+import Loader from "../Loader/Loader";
 
 const Details = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const id = location.pathname.split('/').pop() || '';
+  const id = location.pathname.split("/").pop() || "";
   const { data, error, isLoading } = useGetPersonByIdQuery(id);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Details = () => {
       {isLoading ? (
         <Loader />
       ) : data ? (
-        <div>
+        <div data-testid="details">
           <div className="details-container">
             <p className="results-info">Name: {data.name}</p>
             <p className="results-info">Mass: {data.mass}</p>
@@ -36,7 +36,11 @@ const Details = () => {
             <p className="results-info">Birth year: {data.birth_year}</p>
             <p className="results-info">Gender: {data.gender}</p>
           </div>
-          <button className="details-button" onClick={handleClose}>
+          <button
+            className="details-button"
+            onClick={handleClose}
+            data-testid="closeButton"
+          >
             Close
           </button>
         </div>

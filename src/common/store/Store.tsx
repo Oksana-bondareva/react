@@ -1,4 +1,3 @@
-// src/app/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "../RootReducer/rootReducer";
 import { apiSlice } from "../../utils/apiSlice";

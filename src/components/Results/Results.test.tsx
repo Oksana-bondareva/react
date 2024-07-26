@@ -1,12 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Results from "./Results";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../../common/store/Store";
 
 test('renders "Oops, nothing was found!" when data is empty', () => {
   render(
-    <BrowserRouter>
-      <Results data={[]} />
-    </BrowserRouter>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <Results data={[]} />
+      </BrowserRouter>
+    </Provider>,
   );
   const notFoundMessage = screen.getByText("Oops, nothing was found!");
   expect(notFoundMessage).toBeInTheDocument();
@@ -28,9 +32,11 @@ test("renders the specified number of cards", () => {
   ];
 
   render(
-    <BrowserRouter>
-      <Results data={mockData} />
-    </BrowserRouter>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <Results data={mockData} />
+      </BrowserRouter>
+    </Provider>,
   );
 
   const characterCards = screen.getAllByTestId("character-card");
@@ -53,9 +59,11 @@ test("should show Details when clicking on results-card", () => {
   ];
 
   render(
-    <BrowserRouter>
-      <Results data={mockData} />
-    </BrowserRouter>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <Results data={mockData} />
+      </BrowserRouter>
+    </Provider>,
   );
 
   const characterCard = screen.getByText("Name: Luke Skywalker");

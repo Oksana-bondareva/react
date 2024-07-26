@@ -1,10 +1,25 @@
 import "./Results.css";
 import { ResultItems } from "../../utils/interfaces";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem, removeItem } from "../../utils/selectedItemsSlice";
+import { RootState } from "../../common/RootReducer/rootReducer";
 
 const Results: React.FC<ResultItems> = ({ data }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const selectedItems = useSelector(
+    (state: RootState) => state.selectedItems.items,
+  );
+  const dispatch = useDispatch();
+
+  const handleSelectItem = (item: string) => {
+    dispatch(addItem(item));
+  };
+
+  const handleUnselectItem = (item: string) => {
+    dispatch(removeItem(item));
+  };
 
   return (
     <div className="results">
@@ -16,14 +31,30 @@ const Results: React.FC<ResultItems> = ({ data }) => {
       ></div>
       <div className="results-container">
         {data.map((item, index) => (
-          <Link
+          <div
             className="results-card"
             data-testid="character-card"
             key={index}
-            to={`/search/${location.pathname.split("/")[2] || 1}/details/${item.url.slice(29, item.url.lastIndexOf("/"))}`}
+            onClick={() => {
+              navigate(
+                `/search/${location.pathname.split("/")[2] || 1}/details/${item.url.slice(29, item.url.lastIndexOf("/"))}`,
+              );
+            }}
           >
+            <input
+              type="checkbox"
+              className="card-checkbox"
+              onChange={() => {
+                if (selectedItems.includes(item.name)) {
+                  handleUnselectItem(item.name);
+                } else {
+                  handleSelectItem(item.name);
+                }
+              }}
+              checked={selectedItems.includes(item.name)}
+            ></input>
             <p className="results-info">Name: {item.name}</p>
-          </Link>
+          </div>
         ))}
         {!data.length && !location.pathname.includes(`/details/`) && (
           <div className="not-found-message">Oops, nothing was found!</div>

@@ -18,8 +18,11 @@ const selectedItemsSlice = createSlice({
     removeItem: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item !== action.payload);
     },
+    clearItems: (state) => {
+      state.items = [];
+    },
   },
 });
 
-export const { addItem, removeItem } = selectedItemsSlice.actions;
+export const { addItem, removeItem, clearItems } = selectedItemsSlice.actions;
 export const selectedItemsReducer = selectedItemsSlice.reducer;

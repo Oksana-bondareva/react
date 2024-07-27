@@ -60,11 +60,9 @@ const Results: React.FC<ResultItems> = ({ data }) => {
         {!data.length && !location.pathname.includes(`/details/`) && (
           <div className="not-found-message">Oops, nothing was found!</div>
         )}
-        {selectedItems.length > 0 && (
-          <Flyout />
-        )}
+        {selectedItems.length > 0 && <Flyout />}
       </div>
-      {location.pathname.includes(`/details/`) && <Outlet /> }
+      {location.pathname.includes(`/details/`) && <Outlet />}
     </div>
   );
 };

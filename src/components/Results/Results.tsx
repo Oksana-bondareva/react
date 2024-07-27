@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../utils/selectedItemsSlice";
 import { RootState } from "../../common/RootReducer/rootReducer";
+import Flyout from "../Flyout/Flyout";
 
 const Results: React.FC<ResultItems> = ({ data }) => {
   const location = useLocation();
@@ -59,8 +60,11 @@ const Results: React.FC<ResultItems> = ({ data }) => {
         {!data.length && !location.pathname.includes(`/details/`) && (
           <div className="not-found-message">Oops, nothing was found!</div>
         )}
+        {selectedItems.length > 0 && (
+          <Flyout />
+        )}
       </div>
-      <Outlet />
+      {location.pathname.includes(`/details/`) && <Outlet /> }
     </div>
   );
 };

@@ -13,12 +13,11 @@ const router = createBrowserRouter([
         path: ":page",
         element: <Results data={[]} />,
         errorElement: <NotFound />,
-        children: [
-          {
-            path: "details/:idDetails",
-            element: <Details />,
-          },
-        ],
+      },
+      {
+        path: ":page/details/:idDetails",
+        element: <Details />,
+        errorElement: <NotFound />,
       },
     ],
   },

@@ -40,6 +40,7 @@
     color: azure;
   }
   
-  .dark .search-form__input {
+  .dark .search-form__input,
+  .dark .flyout-wrapper {
     background-color: rgb(203, 199, 199);
   }

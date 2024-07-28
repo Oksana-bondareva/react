@@ -14,12 +14,32 @@ const Results: React.FC<ResultItems> = ({ data }) => {
   );
   const dispatch = useDispatch();
 
-  const handleSelectItem = (item: string) => {
+  const handleSelectItem = (item: {
+    name: string;
+    mass: string;
+    height: string;
+    hair_color: string;
+    skin_color: string;
+    eye_color: string;
+    birth_year: string;
+    gender: string;
+    url: string;
+  }) => {
     dispatch(addItem(item));
   };
 
-  const handleUnselectItem = (item: string) => {
-    dispatch(removeItem(item));
+  const handleUnselectItem = (item: {
+    name: string;
+    mass: string;
+    height: string;
+    hair_color: string;
+    skin_color: string;
+    eye_color: string;
+    birth_year: string;
+    gender: string;
+    url: string;
+  }) => {
+    dispatch(removeItem(item.name));
   };
 
   return (
@@ -46,18 +66,24 @@ const Results: React.FC<ResultItems> = ({ data }) => {
               type="checkbox"
               className="card-checkbox"
               onChange={() => {
-                if (selectedItems.includes(item.name)) {
-                  handleUnselectItem(item.name);
+                if (
+                  selectedItems.some(
+                    (selectedItem) => selectedItem.name === item.name,
+                  )
+                ) {
+                  handleUnselectItem(item);
                 } else {
-                  handleSelectItem(item.name);
+                  handleSelectItem(item);
                 }
               }}
-              checked={selectedItems.includes(item.name)}
+              checked={selectedItems.some(
+                (selectedItem) => selectedItem.name === item.name,
+              )}
             ></input>
             <p className="results-info">Name: {item.name}</p>
           </div>
         ))}
-        {!data.length && !location.pathname.includes(`/details/`) && (
+        {!data.length && (
           <div className="not-found-message">Oops, nothing was found!</div>
         )}
         {selectedItems.length > 0 && <Flyout />}

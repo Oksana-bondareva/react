@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
 import "@testing-library/jest-dom";
 import App from "./App";
 import { vi } from "vitest";
@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { apiSlice } from "./utils/apiSlice";
 import rootReducer, { RootState } from "./common/RootReducer/rootReducer";
 import { ThemeProvider } from "./components/Theme/ThemeContext";
+import store from "./common/store/Store";
 
 const renderWithProviders = (
   ui: React.ReactElement,
@@ -48,5 +49,69 @@ describe("Main component", () => {
 
     fireEvent.click(screen.getByText("Search"));
     expect(screen.getByText("Search")).toBeInTheDocument();
+  });
+
+  it('The next page button should increase the page number', async () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+        <ThemeProvider>
+          <App />
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>,
+    );
+
+    await waitFor(() =>
+      expect(
+        screen.getByText((_, element) => {
+          return element?.textContent === "Page 1";
+        }),
+      ).toBeInTheDocument(),
+    );
+
+    act(() => {
+      fireEvent.click(screen.getByText('Next'));
+    });
+
+    await waitFor(() =>
+      expect(
+        screen.getByText((_, element) => {
+          return element?.textContent === "Page 2";
+        }),
+      ).toBeInTheDocument(),
+    );
+  });
+
+  it('The prev page button should increase the page number', async () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+        <ThemeProvider>
+          <App />
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>,
+    );
+
+    await waitFor(() =>
+      expect(
+        screen.getByText((_, element) => {
+          return element?.textContent === "Page 2";
+        }),
+      ).toBeInTheDocument(),
+    );
+
+    act(() => {
+      fireEvent.click(screen.getByText('Prev'));
+    });
+
+    await waitFor(() =>
+      expect(
+        screen.getByText((_, element) => {
+          return element?.textContent === "Page 1";
+        }),
+      ).toBeInTheDocument(),
+    );
   });
 });

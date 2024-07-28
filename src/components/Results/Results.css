@@ -1,0 +1,50 @@
+.results-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.results-card {
+    width: 300px;
+    height: 100px;
+    display: flex;
+    border: 2px solid brown;
+    padding: 15px;
+    gap: 5px;
+    background-color: rgb(243, 185, 185);
+    align-items: center;
+    justify-content: first baseline;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 100;
+    color: rgb(69, 19, 19);
+}
+
+.results-info {
+    margin: 0px;
+}
+
+.not-found-message {
+    font-size: 35px;
+    color: brown;
+}
+
+.results {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.results-overlay {
+    position: absolute;
+    top: -110px;
+    left: -220px;
+    width: 110vw;
+    height: 230vh;
+}
+
+.card-checkbox {
+    cursor: pointer;
+}

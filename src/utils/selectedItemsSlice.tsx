@@ -13,20 +13,7 @@ const selectedItemsSlice = createSlice({
   name: "selectedItems",
   initialState,
   reducers: {
-    addItem: (
-      state,
-      action: PayloadAction<{
-        name: string;
-        mass: string;
-        height: string;
-        hair_color: string;
-        skin_color: string;
-        eye_color: string;
-        birth_year: string;
-        gender: string;
-        url: string;
-      }>,
-    ) => {
+    addItem: (state, action: PayloadAction<ResultItem>) => {
       const {
         name,
         height,

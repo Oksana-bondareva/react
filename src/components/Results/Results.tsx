@@ -6,6 +6,18 @@ import { addItem, removeItem } from "../../utils/selectedItemsSlice";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import Flyout from "../Flyout/Flyout";
 
+type Item = {
+  name: string;
+  mass: string;
+  height: string;
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
+  url: string;
+};
+
 const Results: React.FC<ResultItems> = ({ data }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -14,31 +26,11 @@ const Results: React.FC<ResultItems> = ({ data }) => {
   );
   const dispatch = useDispatch();
 
-  const handleSelectItem = (item: {
-    name: string;
-    mass: string;
-    height: string;
-    hair_color: string;
-    skin_color: string;
-    eye_color: string;
-    birth_year: string;
-    gender: string;
-    url: string;
-  }) => {
+  const handleSelectItem = (item: Item) => {
     dispatch(addItem(item));
   };
 
-  const handleUnselectItem = (item: {
-    name: string;
-    mass: string;
-    height: string;
-    hair_color: string;
-    skin_color: string;
-    eye_color: string;
-    birth_year: string;
-    gender: string;
-    url: string;
-  }) => {
+  const handleUnselectItem = (item: Item) => {
     dispatch(removeItem(item.name));
   };
 
@@ -65,6 +57,7 @@ const Results: React.FC<ResultItems> = ({ data }) => {
             <input
               type="checkbox"
               className="card-checkbox"
+              data-testid="checkbox"
               onChange={() => {
                 if (
                   selectedItems.some(

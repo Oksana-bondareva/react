@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
 import "@testing-library/jest-dom";
 import App from "./App";
@@ -51,12 +57,12 @@ describe("Main component", () => {
     expect(screen.getByText("Search")).toBeInTheDocument();
   });
 
-  it('The next page button should increase the page number', async () => {
+  it("The next page button should increase the page number", async () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
-        <ThemeProvider>
-          <App />
+          <ThemeProvider>
+            <App />
           </ThemeProvider>
         </BrowserRouter>
       </Provider>,
@@ -71,7 +77,7 @@ describe("Main component", () => {
     );
 
     act(() => {
-      fireEvent.click(screen.getByText('Next'));
+      fireEvent.click(screen.getByText("Next"));
     });
 
     await waitFor(() =>
@@ -83,12 +89,12 @@ describe("Main component", () => {
     );
   });
 
-  it('The prev page button should increase the page number', async () => {
+  it("The prev page button should increase the page number", async () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
-        <ThemeProvider>
-          <App />
+          <ThemeProvider>
+            <App />
           </ThemeProvider>
         </BrowserRouter>
       </Provider>,
@@ -103,7 +109,7 @@ describe("Main component", () => {
     );
 
     act(() => {
-      fireEvent.click(screen.getByText('Prev'));
+      fireEvent.click(screen.getByText("Prev"));
     });
 
     await waitFor(() =>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./Flyout.css";
+import "./Flyout.module.css";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import { clearItems, downloadItems } from "../../utils/selectedItemsSlice";
 

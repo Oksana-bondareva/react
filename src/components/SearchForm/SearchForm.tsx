@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import "./SearchForm.css";
+import "./SearchForm.module.css";
 import useSearchQuery from "../../utils/useLocalStorage";
 
 interface SearchFormProps {

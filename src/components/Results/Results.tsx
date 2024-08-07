@@ -1,10 +1,11 @@
-import "./Results.css";
+import "./Results.module.css";
 import { ResultItems } from "../../utils/interfaces";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { addItem, removeItem } from "../../utils/selectedItemsSlice";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import Flyout from "../Flyout/Flyout";
+import Details from "../Details/Details";
 
 type Item = {
   name: string;
@@ -19,12 +20,11 @@ type Item = {
 };
 
 const Results: React.FC<ResultItems> = ({ data }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
   );
   const dispatch = useDispatch();
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
   const handleSelectItem = (item: Item) => {
     dispatch(addItem(item));
@@ -34,25 +34,23 @@ const Results: React.FC<ResultItems> = ({ data }) => {
     dispatch(removeItem(item.name));
   };
 
+  const handleCardClick = (item: Item) => {
+    setSelectedItemId(item.url.slice(29, item.url.lastIndexOf("/")));
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedItemId(null);
+  };
+
   return (
     <div className="results">
-      <div
-        className="results-overlay"
-        onClick={() => {
-          navigate(`/search/${location.pathname.split("/")[2] || 1}`);
-        }}
-      ></div>
       <div className="results-container">
         {data.map((item, index) => (
           <div
             className="results-card"
             data-testid="character-card"
             key={index}
-            onClick={() => {
-              navigate(
-                `/search/${location.pathname.split("/")[2] || 1}/details/${item.url.slice(29, item.url.lastIndexOf("/"))}`,
-              );
-            }}
+            onClick={() => handleCardClick(item)}
           >
             <input
               type="checkbox"
@@ -81,7 +79,9 @@ const Results: React.FC<ResultItems> = ({ data }) => {
         )}
         {selectedItems.length > 0 && <Flyout />}
       </div>
-      {location.pathname.includes(`/details/`) && <Outlet />}
+      {selectedItemId && (
+        <Details id={selectedItemId} onClose={handleCloseDetails} />
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import "./App.module.css";
 import SearchForm from "./components/SearchForm/SearchForm";
 import Results from "./components/Results/Results";
 import Loader from "./components/Loader/Loader";

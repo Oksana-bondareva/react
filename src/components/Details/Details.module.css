@@ -1,4 +1,4 @@
-.details-wrapper {
+.detailsWrapper {
     position: relative;
 }
 
@@ -16,7 +16,7 @@
     font-size: 25px;
 }
 
-.details-button {
+.detailsButton {
     position: absolute;
     top: 0;
     right: 0;

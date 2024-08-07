@@ -1,13 +1,14 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useGetPersonByIdQuery } from "../../utils/apiSlice";
-import "./Details.css";
+import styles from "./Details.module.css";
 import Loader from "../Loader/Loader";
 
-const Details = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const id = location.pathname.split("/").pop() || "";
+interface DetailsProps {
+  id: string;
+  onClose: () => void;
+}
+
+const Details: React.FC<DetailsProps> = ({ id, onClose }) => {
   const { data, error, isLoading } = useGetPersonByIdQuery(id);
 
   useEffect(() => {
@@ -16,12 +17,8 @@ const Details = () => {
     }
   }, [error]);
 
-  const handleClose = () => {
-    navigate(-1);
-  };
-
   return (
-    <div className="details-wrapper">
+    <div className={styles.detailsWrapper}>
       {isLoading ? (
         <Loader />
       ) : data ? (
@@ -37,8 +34,8 @@ const Details = () => {
             <p className="results-info">Gender: {data.gender}</p>
           </div>
           <button
-            className="details-button"
-            onClick={handleClose}
+            className={styles.detailsButton}
+            onClick={onClose}
             data-testid="closeButton"
           >
             Close

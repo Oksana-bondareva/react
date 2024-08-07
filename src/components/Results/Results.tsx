@@ -6,6 +6,7 @@ import { addItem, removeItem } from "../../utils/selectedItemsSlice";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import Flyout from "../Flyout/Flyout";
 import Details from "../Details/Details";
+import { useRouter } from "next/router";
 
 type Item = {
   name: string;
@@ -20,6 +21,7 @@ type Item = {
 };
 
 const Results: React.FC<ResultItems> = ({ data }) => {
+  const router = useRouter();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
   );
@@ -40,6 +42,7 @@ const Results: React.FC<ResultItems> = ({ data }) => {
 
   const handleCloseDetails = () => {
     setSelectedItemId(null);
+    router.back();
   };
 
   return (

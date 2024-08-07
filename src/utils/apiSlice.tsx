@@ -18,3 +18,5 @@ export const apiSlice = createApi({
 });
 
 export const { useGetPersonByIdQuery, useGetPeopleQuery } = apiSlice;
+export const { getRunningQueriesThunk } = apiSlice.util;
+export const { getPersonById, getPeople } = apiSlice.endpoints;

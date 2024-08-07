@@ -23,15 +23,15 @@ const Details: React.FC<DetailsProps> = ({ id, onClose }) => {
         <Loader />
       ) : data ? (
         <div data-testid="details">
-          <div className="details-container">
-            <p className="results-info">Name: {data.name}</p>
-            <p className="results-info">Mass: {data.mass}</p>
-            <p className="results-info">Height: {data.height}</p>
-            <p className="results-info">Hair color: {data.hair_color}</p>
-            <p className="results-info">Skin color: {data.skin_color}</p>
-            <p className="results-info">Eye color: {data.eye_color}</p>
-            <p className="results-info">Birth year: {data.birth_year}</p>
-            <p className="results-info">Gender: {data.gender}</p>
+          <div className={styles.detailsContainer}>
+            <p className={styles.resultsInfo}>Name: {data.name}</p>
+            <p className={styles.resultsInfo}>Mass: {data.mass}</p>
+            <p className={styles.resultsInfo}>Height: {data.height}</p>
+            <p className={styles.resultsInfo}>Hair color: {data.hair_color}</p>
+            <p className={styles.resultsInfo}>Skin color: {data.skin_color}</p>
+            <p className={styles.resultsInfo}>Eye color: {data.eye_color}</p>
+            <p className={styles.resultsInfo}>Birth year: {data.birth_year}</p>
+            <p className={styles.resultsInfo}>Gender: {data.gender}</p>
           </div>
           <button
             className={styles.detailsButton}

@@ -6,6 +6,7 @@ import SearchForm from '../components/SearchForm/SearchForm';
 import Results from '../components/Results/Results';
 import Loader from '../components/Loader/Loader';
 import ThemeToggle from '../components/Theme/ThemeToggle';
+import styles from "../App.module.css"
 
 import { ResultItem } from '../utils/interfaces';
 import { wrapper } from '../common/store/Store';
@@ -64,8 +65,8 @@ interface HomeProps {
   
     return (
       <div className={theme}>
-        <section className="search-section">
-          <button className="error-button" onClick={errorButtonHandler}>
+        <section className={styles.searchSection}>
+          <button className={styles.errorButton} onClick={errorButtonHandler}>
             ERROR
           </button>
           <SearchForm onSearch={handleSearch} />
@@ -75,14 +76,14 @@ interface HomeProps {
           {isLoading ? (
             <Loader />
           ) : (
-            <div className="results-wrapper">
+            <div className={styles.resultWrapper}>
               <Results data={dataApi?.results || initialData.results || []} />
-              <div className="pagination-pages">
-                <button className="pagination-button" onClick={handlePreviousPage}>
+              <div className={styles.paginationPages}>
+                <button className={styles.paginationButton} onClick={handlePreviousPage}>
                   Prev
                 </button>
                 <span>Page {currentPage}</span>
-                <button className="pagination-button" onClick={handleNextPage}>
+                <button className={styles.paginationButton} onClick={handleNextPage}>
                   Next
                 </button>
               </div>

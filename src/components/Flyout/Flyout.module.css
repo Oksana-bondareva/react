@@ -1,4 +1,4 @@
-.flyout-wrapper {
+.flyoutWrapper {
     position: fixed;
     top: 80vh;
     z-index: 200;
@@ -14,7 +14,7 @@
     gap: 10px;
 }
 
-.flyout-button {
+.flyoutButton {
     width: 170px;
     color: rgb(63, 13, 13);
     border: 3px solid rgb(94, 17, 94);
@@ -25,7 +25,7 @@
     background-color: rgb(221, 190, 251);
 }
 
-.flyout-button:hover {
+.flyoutButton:hover {
     background-color: rgb(35, 8, 61);
     color: white;
     transition: 1s;

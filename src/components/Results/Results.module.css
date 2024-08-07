@@ -1,4 +1,4 @@
-.results-container {
+.resultsContainer {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -6,7 +6,7 @@
     justify-content: space-around;
 }
 
-.results-card {
+.resultsCard {
     width: 300px;
     height: 100px;
     display: flex;
@@ -22,11 +22,11 @@
     color: rgb(69, 19, 19);
 }
 
-.results-info {
+.resultsInfo {
     margin: 0px;
 }
 
-.not-found-message {
+.notFoundMessage {
     font-size: 35px;
     color: brown;
 }
@@ -37,7 +37,7 @@
     position: relative;
 }
 
-.results-overlay {
+.resultsOverlay {
     position: absolute;
     top: -110px;
     left: -220px;
@@ -45,6 +45,6 @@
     height: 230vh;
 }
 
-.card-checkbox {
+.cardCheckbox {
     cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import "./Results.module.css";
+import styles from "./Results.module.css";
 import { ResultItems } from "../../utils/interfaces";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -43,18 +43,18 @@ const Results: React.FC<ResultItems> = ({ data }) => {
   };
 
   return (
-    <div className="results">
-      <div className="results-container">
+    <div className={styles.results}>
+      <div className={styles.resultsContainer}>
         {data.map((item, index) => (
           <div
-            className="results-card"
+            className={styles.resultsCard}
             data-testid="character-card"
             key={index}
             onClick={() => handleCardClick(item)}
           >
             <input
               type="checkbox"
-              className="card-checkbox"
+              className={styles.cardCheckbox}
               data-testid="checkbox"
               onChange={() => {
                 if (
@@ -75,7 +75,7 @@ const Results: React.FC<ResultItems> = ({ data }) => {
           </div>
         ))}
         {!data.length && (
-          <div className="not-found-message">Oops, nothing was found!</div>
+          <div className={styles.notFoundMessage}>Oops, nothing was found!</div>
         )}
         {selectedItems.length > 0 && <Flyout />}
       </div>

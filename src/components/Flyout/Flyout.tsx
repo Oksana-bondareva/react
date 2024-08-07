@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./Flyout.module.css";
+import styles from "./Flyout.module.css";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import { clearItems, downloadItems } from "../../utils/selectedItemsSlice";
 
@@ -19,12 +19,12 @@ const Flyout = () => {
   };
 
   return (
-    <div className="flyout-wrapper">
-      <button className="flyout-button" onClick={handleUnselectItems}>
+    <div className={styles.flyoutWrapper}>
+      <button className={styles.flyoutButton} onClick={handleUnselectItems}>
         Unselect all
       </button>
-      <div className="flyout-count">Selected: {selectedItems.length}</div>
-      <button className="flyout-button" onClick={handleDownload}>
+      <div className={styles.flyoutCount}>Selected: {selectedItems.length}</div>
+      <button className={styles.flyoutButton} onClick={handleDownload}>
         Download
       </button>
     </div>

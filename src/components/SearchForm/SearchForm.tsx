@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import "./SearchForm.module.css";
+import styles from "./SearchForm.module.css";
 import useSearchQuery from "../../utils/useLocalStorage";
 
 interface SearchFormProps {
@@ -19,15 +19,15 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="search-form">
+    <div className={styles.searchForm}>
       <input
-        className="search-form__input"
+        className={styles.searchFormInput}
         type="text"
         placeholder="Search..."
         value={searchQuery}
         onChange={handleInputChange}
       />
-      <button className="search-form__button" onClick={handleSearch}>
+      <button className={styles.searchFormButton} onClick={handleSearch}>
         Search
       </button>
     </div>

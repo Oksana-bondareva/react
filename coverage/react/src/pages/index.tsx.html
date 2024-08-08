@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.36% </span>
+                <span class="strong">64.4% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>77/111</span>
+                <span class='fraction'>76/118</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.36% </span>
+                <span class="strong">64.4% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>77/111</span>
+                <span class='fraction'>76/118</span>
             </div>
         
             
@@ -198,7 +198,14 @@
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -245,7 +252,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -346,8 +360,8 @@ import { wrapper } from "../common/store/Store";
 import { GetServerSideProps } from "next";
 import themeStyles from "../components/Theme/Theme.module.css";
 &nbsp;
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  (store) =&gt; async (context) =&gt; {
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) =&gt; async (context) =&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const currentPage = Number(context.query.page) || 1;</span>
 <span class="cstat-no" title="statement not covered" >      const searchValue = context.query.search?.toString() || "";</span>
@@ -357,13 +371,13 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
 <span class="cstat-no" title="statement not covered" >        apiSlice.endpoints.getPeople.initiate({</span>
 <span class="cstat-no" title="statement not covered" >          search: searchValue,</span>
 <span class="cstat-no" title="statement not covered" >          page: currentPage,</span>
-<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >        }),</span>
 <span class="cstat-no" title="statement not covered" >      );</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      let personResponse;</span>
 <span class="cstat-no" title="statement not covered" >      if (idValue) {</span>
 <span class="cstat-no" title="statement not covered" >        personResponse = await store.dispatch(</span>
-<span class="cstat-no" title="statement not covered" >          apiSlice.endpoints.getPersonById.initiate(idValue)</span>
+<span class="cstat-no" title="statement not covered" >          apiSlice.endpoints.getPersonById.initiate(idValue),</span>
 <span class="cstat-no" title="statement not covered" >        );</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 &nbsp;
@@ -371,16 +385,23 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
 <span class="cstat-no" title="statement not covered" >      const initialData = searchResponse.data || { results: [] };</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return {</span>
-<span class="cstat-no" title="statement not covered" >        props: { initialData, currentPage, personData: personResponse?.data || null },</span>
+<span class="cstat-no" title="statement not covered" >        props: {</span>
+<span class="cstat-no" title="statement not covered" >          initialData,</span>
+<span class="cstat-no" title="statement not covered" >          currentPage,</span>
+<span class="cstat-no" title="statement not covered" >          personData: personResponse?.data || null,</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >      console.error("Error in getServerSideProps:", error);</span>
 <span class="cstat-no" title="statement not covered" >      return {</span>
-<span class="cstat-no" title="statement not covered" >        props: { initialData: { results: [] }, currentPage: 1, personData: null },</span>
+<span class="cstat-no" title="statement not covered" >        props: {</span>
+<span class="cstat-no" title="statement not covered" >          initialData: { results: [] },</span>
+<span class="cstat-no" title="statement not covered" >          currentPage: 1,</span>
+<span class="cstat-no" title="statement not covered" >          personData: null,</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-);
+<span class="cstat-no" title="statement not covered" >  });</span>
 &nbsp;
 interface HomeProps {
   initialData: { results: ResultItem[] };
@@ -391,14 +412,14 @@ interface HomeProps {
 const Home = ({ initialData, currentPage, personData }: HomeProps) =&gt; {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("search") || <span class="branch-0 cbranch-no" title="branch not covered" >"" : ""</span>
+    typeof window !== "undefined" ? localStorage.getItem("search") || <span class="branch-0 cbranch-no" title="branch not covered" >"" : "",</span>
   );
   const [page, setPage] = useState(currentPage);
   const { theme } = useTheme();
 &nbsp;
   useEffect(() =&gt; {
     setSearchValue(
-      typeof window !== "undefined" ? localStorage.getItem("search") || <span class="branch-0 cbranch-no" title="branch not covered" >"" : ""</span>
+      typeof window !== "undefined" ? localStorage.getItem("search") || <span class="branch-0 cbranch-no" title="branch not covered" >"" : "",</span>
     );
     const currentPageFromUrl = Number(router.query.page<span class="branch-0 cbranch-no" title="branch not covered" >) || 1;</span>
     setPage(currentPageFromUrl);
@@ -475,7 +496,7 @@ export default Home;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-08T22:46:56.927Z
+                at 2024-08-08T23:00:28.493Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

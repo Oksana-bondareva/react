@@ -9,6 +9,7 @@ import styles from "../App.module.css";
 import { ResultItem } from "../utils/interfaces";
 import { wrapper } from "../common/store/Store";
 import { GetServerSideProps } from "next";
+import themeStyles from "../components/Theme/Theme.module.css";
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
@@ -89,7 +90,7 @@ const Home = ({ initialData, currentPage, personData }: HomeProps) => {
   };
 
   return (
-    <div className={theme}>
+    <div className={theme === "light" ? themeStyles.light : themeStyles.dark}>
       <section className={styles.searchSection}>
         <button
           className={styles.errorButton}

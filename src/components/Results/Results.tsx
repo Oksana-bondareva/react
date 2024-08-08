@@ -57,6 +57,11 @@ const Results: React.FC<ResultItems & { personData: Item | null, currentPage: nu
 
   return (
     <div className={styles.results}>
+      <div
+        className={styles.resultsOverlay}
+        onClick={() => {
+          router.push(`/?search=${router.query.search}&page=${router.query.page}`);
+        }}></div>
       <div className={styles.resultsContainer}>
         {data.map((item, index) => (
           <div
@@ -84,7 +89,7 @@ const Results: React.FC<ResultItems & { personData: Item | null, currentPage: nu
                 (selectedItem) => selectedItem.name === item.name,
               )}
             ></input>
-            <p className="results-info">Name: {item.name}</p>
+            <p className={styles.resultsInfo}>Name: {item.name}</p>
           </div>
         ))}
         {!data.length && (

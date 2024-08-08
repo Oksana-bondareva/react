@@ -19,7 +19,7 @@ const Flyout = () => {
   };
 
   return (
-    <div className={styles.flyoutWrapper}>
+    <div className={styles.flyoutWrapper} data-testid="flyout">
       <button className={styles.flyoutButton} onClick={handleUnselectItems}>
         Unselect all
       </button>

@@ -1,24 +1,13 @@
 import styles from "./Details.module.css";
 import Loader from "../Loader/Loader";
-
-interface PersonData {
-  name: string;
-  mass: string;
-  height: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-}
+import { ResultItem } from "../../utils/interfaces";
 
 interface DetailsProps {
-  data: PersonData | null;
+  data: ResultItem | null;
   onClose: () => void;
 }
 
 const Details: React.FC<DetailsProps> = ({ data, onClose }) => {
-
   return (
     <div className={styles.detailsWrapper}>
       {!data ? (

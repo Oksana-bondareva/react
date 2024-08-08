@@ -1,12 +1,36 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-import { vi } from "vitest";
-import Details from "./Details";
-import { configureStore } from "@reduxjs/toolkit";
+import { render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { apiSlice } from "../../utils/apiSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import Details from "./Details";
 import rootReducer, { RootState } from "../../common/RootReducer/rootReducer";
 import createFetchMock from "vitest-fetch-mock";
+import { vi } from "vitest";
+import { NextRouter } from "next/router";
+import { apiSlice } from "../../utils/apiSlice";
+import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
+
+export function createMockRouter(router: Partial<NextRouter>): NextRouter {
+  return {
+    basePath: "",
+    pathname: "/",
+    route: "/",
+    asPath: "/",
+    query: {},
+    push: vi.fn(),
+    replace: vi.fn(),
+    reload: vi.fn(),
+    back: vi.fn(),
+    prefetch: vi.fn().mockResolvedValue(undefined),
+    beforePopState: vi.fn(),
+    events: {
+      on: vi.fn(),
+      off: vi.fn(),
+      emit: vi.fn(),
+    },
+    isFallback: false,
+    ...router,
+  } as NextRouter;
+}
 
 const renderWithProviders = (
   ui: React.ReactElement,
@@ -19,7 +43,15 @@ const renderWithProviders = (
     preloadedState,
   });
 
-  return render(<Provider store={store}>{ui}</Provider>);
+  const router = createMockRouter({
+    query: { search: "", page: "1", id: "" },
+  });
+
+  return render(
+    <Provider store={store}>
+      <RouterContext.Provider value={router}>{ui}</RouterContext.Provider>
+    </Provider>,
+  );
 };
 
 const fetchMock = createFetchMock(vi);
@@ -44,24 +76,11 @@ describe("Details component", () => {
     };
     fetchMock.mockResponse(JSON.stringify(mockData));
 
-    renderWithProviders(
-      <BrowserRouter>
-        <Details />
-      </BrowserRouter>,
-    );
+    renderWithProviders(<Details data={mockData} onClose={() => {}} />);
 
     await waitFor(() =>
-      expect(
-        screen.getByText((_, element) => {
-          return element?.textContent === "Name: Luke Skywalker";
-        }),
-      ).toBeInTheDocument(),
+      expect(screen.getByText("Name: Luke Skywalker")).toBeInTheDocument(),
     );
-
-    const characterCard = screen.getByText((_, element) => {
-      return element?.textContent === "Name: Luke Skywalker";
-    });
-    fireEvent.click(characterCard);
 
     expect(screen.getByText("Mass: 77")).toBeInTheDocument();
     expect(screen.getByText("Height: 172")).toBeInTheDocument();
@@ -82,24 +101,12 @@ describe("Details component", () => {
     };
     fetchMock.mockResponse(JSON.stringify(mockData));
 
-    renderWithProviders(
-      <BrowserRouter>
-        <Details />
-      </BrowserRouter>,
-    );
+    renderWithProviders(<Details data={mockData} onClose={() => {}} />);
 
     await waitFor(() =>
-      expect(
-        screen.getByText((_, element) => {
-          return element?.textContent === "Name: Luke Skywalker";
-        }),
-      ).toBeInTheDocument(),
+      expect(screen.getByText("Name: Luke Skywalker")).toBeInTheDocument(),
     );
 
-    const characterCard = screen.getByText((_, element) => {
-      return element?.textContent === "Name: Luke Skywalker";
-    });
-    fireEvent.click(characterCard);
     screen.getByTestId("closeButton").click();
     await waitFor(() => expect(history.length).toEqual(1));
   });

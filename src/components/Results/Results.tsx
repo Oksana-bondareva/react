@@ -20,7 +20,9 @@ export type Item = {
   url: string;
 };
 
-const Results: React.FC<ResultItems & { personData: Item | null, currentPage: number }> = ({ data, personData }) => {
+const Results: React.FC<
+  ResultItems & { personData: Item | null; currentPage: number }
+> = ({ data, personData }) => {
   const router = useRouter();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
@@ -60,8 +62,11 @@ const Results: React.FC<ResultItems & { personData: Item | null, currentPage: nu
       <div
         className={styles.resultsOverlay}
         onClick={() => {
-          router.push(`/?search=${router.query.search}&page=${router.query.page}`);
-        }}></div>
+          router.push(
+            `/?search=${router.query.search}&page=${router.query.page}`,
+          );
+        }}
+      ></div>
       <div className={styles.resultsContainer}>
         {data.map((item, index) => (
           <div

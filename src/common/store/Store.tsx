@@ -3,7 +3,7 @@ import rootReducer from "../RootReducer/rootReducer";
 import { apiSlice } from "../../utils/apiSlice";
 import { createWrapper } from "next-redux-wrapper";
 
-const makeStore = () =>
+export const makeStore = () =>
   configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>

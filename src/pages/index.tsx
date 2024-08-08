@@ -11,8 +11,8 @@ import { wrapper } from "../common/store/Store";
 import { GetServerSideProps } from "next";
 import themeStyles from "../components/Theme/Theme.module.css";
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (context) => {
     try {
       const currentPage = Number(context.query.page) || 1;
       const searchValue = context.query.search?.toString() || "";
@@ -22,13 +22,13 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         apiSlice.endpoints.getPeople.initiate({
           search: searchValue,
           page: currentPage,
-        })
+        }),
       );
 
       let personResponse;
       if (idValue) {
         personResponse = await store.dispatch(
-          apiSlice.endpoints.getPersonById.initiate(idValue)
+          apiSlice.endpoints.getPersonById.initiate(idValue),
         );
       }
 
@@ -36,16 +36,23 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
       const initialData = searchResponse.data || { results: [] };
 
       return {
-        props: { initialData, currentPage, personData: personResponse?.data || null },
+        props: {
+          initialData,
+          currentPage,
+          personData: personResponse?.data || null,
+        },
       };
     } catch (error) {
       console.error("Error in getServerSideProps:", error);
       return {
-        props: { initialData: { results: [] }, currentPage: 1, personData: null },
+        props: {
+          initialData: { results: [] },
+          currentPage: 1,
+          personData: null,
+        },
       };
     }
-  }
-);
+  });
 
 interface HomeProps {
   initialData: { results: ResultItem[] };
@@ -56,14 +63,14 @@ interface HomeProps {
 const Home = ({ initialData, currentPage, personData }: HomeProps) => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("search") || "" : ""
+    typeof window !== "undefined" ? localStorage.getItem("search") || "" : "",
   );
   const [page, setPage] = useState(currentPage);
   const { theme } = useTheme();
 
   useEffect(() => {
     setSearchValue(
-      typeof window !== "undefined" ? localStorage.getItem("search") || "" : ""
+      typeof window !== "undefined" ? localStorage.getItem("search") || "" : "",
     );
     const currentPageFromUrl = Number(router.query.page) || 1;
     setPage(currentPageFromUrl);

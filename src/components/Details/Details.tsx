@@ -1,25 +1,27 @@
-import { useEffect } from "react";
-import { useGetPersonByIdQuery } from "../../utils/apiSlice";
 import styles from "./Details.module.css";
 import Loader from "../Loader/Loader";
 
+interface PersonData {
+  name: string;
+  mass: string;
+  height: string;
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
+}
+
 interface DetailsProps {
-  id: string;
+  data: PersonData | null;
   onClose: () => void;
 }
 
-const Details: React.FC<DetailsProps> = ({ id, onClose }) => {
-  const { data, error, isLoading } = useGetPersonByIdQuery(id);
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
+const Details: React.FC<DetailsProps> = ({ data, onClose }) => {
 
   return (
     <div className={styles.detailsWrapper}>
-      {isLoading ? (
+      {!data ? (
         <Loader />
       ) : data ? (
         <div data-testid="details">

@@ -1,70 +1,68 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { apiSlice, useGetPeopleQuery } from "../utils/apiSlice";
+import { apiSlice } from "../utils/apiSlice";
 import { useTheme } from "../components/Theme/ThemeContext";
 import SearchForm from "../components/SearchForm/SearchForm";
-import Results from "../components/Results/Results";
-import Loader from "../components/Loader/Loader";
+import Results, { Item } from "../components/Results/Results";
 import ThemeToggle from "../components/Theme/ThemeToggle";
 import styles from "../App.module.css";
 import { ResultItem } from "../utils/interfaces";
 import { wrapper } from "../common/store/Store";
 import { GetServerSideProps } from "next";
 
-export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (context) => {
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
     try {
       const currentPage = Number(context.query.page) || 1;
       const searchValue = context.query.search?.toString() || "";
+      const idValue = context.query.id?.toString();
 
       const searchResponse = await store.dispatch(
         apiSlice.endpoints.getPeople.initiate({
           search: searchValue,
           page: currentPage,
-        }),
+        })
       );
+
+      let personResponse;
+      if (idValue) {
+        personResponse = await store.dispatch(
+          apiSlice.endpoints.getPersonById.initiate(idValue)
+        );
+      }
 
       await Promise.all(store.dispatch(apiSlice.util.getRunningQueriesThunk()));
       const initialData = searchResponse.data || { results: [] };
 
       return {
-        props: { initialData, currentPage },
+        props: { initialData, currentPage, personData: personResponse?.data || null },
       };
     } catch (error) {
       console.error("Error in getServerSideProps:", error);
       return {
-        props: { initialData: { results: [] }, currentPage: 1 },
+        props: { initialData: { results: [] }, currentPage: 1, personData: null },
       };
     }
-  });
+  }
+);
 
 interface HomeProps {
   initialData: { results: ResultItem[] };
   currentPage: number;
+  personData: Item | null;
 }
 
-const Home = ({ initialData, currentPage }: HomeProps) => {
+const Home = ({ initialData, currentPage, personData }: HomeProps) => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("search") || "" : "",
+    typeof window !== "undefined" ? localStorage.getItem("search") || "" : ""
   );
   const [page, setPage] = useState(currentPage);
-  const {
-    data: dataApi,
-    error,
-    isLoading,
-  } = useGetPeopleQuery({ search: searchValue, page });
   const { theme } = useTheme();
 
   useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
-
-  useEffect(() => {
     setSearchValue(
-      typeof window !== "undefined" ? localStorage.getItem("search") || "" : "",
+      typeof window !== "undefined" ? localStorage.getItem("search") || "" : ""
     );
     const currentPageFromUrl = Number(router.query.page) || 1;
     setPage(currentPageFromUrl);
@@ -105,29 +103,29 @@ const Home = ({ initialData, currentPage }: HomeProps) => {
         <ThemeToggle />
       </section>
       <section>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <div className={styles.resultWrapper}>
-            <Results data={dataApi?.results || initialData.results || []} />
-            <div className={styles.paginationPages}>
-              <button
-                className={styles.paginationButton}
-                onClick={handlePreviousPage}
-                disabled={page === 1}
-              >
-                Prev
-              </button>
-              <span>Page {page}</span>
-              <button
-                className={styles.paginationButton}
-                onClick={handleNextPage}
-              >
-                Next
-              </button>
-            </div>
+        <div className={styles.resultWrapper}>
+          <Results
+            data={initialData.results}
+            personData={personData}
+            currentPage={currentPage}
+          />
+          <div className={styles.paginationPages}>
+            <button
+              className={styles.paginationButton}
+              onClick={handlePreviousPage}
+              disabled={page === 1}
+            >
+              Prev
+            </button>
+            <span>Page {page}</span>
+            <button
+              className={styles.paginationButton}
+              onClick={handleNextPage}
+            >
+              Next
+            </button>
           </div>
-        )}
+        </div>
       </section>
     </div>
   );

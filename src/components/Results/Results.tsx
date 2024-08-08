@@ -1,14 +1,14 @@
-import styles from "./Results.module.css";
-import { ResultItems } from "../../utils/interfaces";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useRouter } from "next/router";
 import { addItem, removeItem } from "../../utils/selectedItemsSlice";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import Flyout from "../Flyout/Flyout";
 import Details from "../Details/Details";
-import { useRouter } from "next/router";
+import styles from "./Results.module.css";
+import { ResultItems } from "../../utils/interfaces";
 
-type Item = {
+export type Item = {
   name: string;
   mass: string;
   height: string;
@@ -20,13 +20,19 @@ type Item = {
   url: string;
 };
 
-const Results: React.FC<ResultItems> = ({ data }) => {
+const Results: React.FC<ResultItems & { personData: Item | null, currentPage: number }> = ({ data, personData }) => {
   const router = useRouter();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
   );
   const dispatch = useDispatch();
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (router.query.id) {
+      setSelectedItemId(router.query.id as string);
+    }
+  }, [router.query.id]);
 
   const handleSelectItem = (item: Item) => {
     dispatch(addItem(item));
@@ -37,12 +43,16 @@ const Results: React.FC<ResultItems> = ({ data }) => {
   };
 
   const handleCardClick = (item: Item) => {
-    setSelectedItemId(item.url.slice(29, item.url.lastIndexOf("/")));
+    const id = item.url.slice(29, item.url.lastIndexOf("/"));
+    setSelectedItemId(id);
+    const searchValue = router.query.search || "";
+    const currentPage = router.query.page || 1;
+    router.push(`/?search=${searchValue}&page=${currentPage}&id=${id}`);
   };
 
   const handleCloseDetails = () => {
     setSelectedItemId(null);
-    router.back();
+    router.push(`/?search=${router.query.search}&page=${router.query.page}`);
   };
 
   return (
@@ -82,8 +92,8 @@ const Results: React.FC<ResultItems> = ({ data }) => {
         )}
         {selectedItems.length > 0 && <Flyout />}
       </div>
-      {selectedItemId && (
-        <Details id={selectedItemId} onClose={handleCloseDetails} />
+      {selectedItemId && personData && (
+        <Details data={personData} onClose={handleCloseDetails} />
       )}
     </div>
   );

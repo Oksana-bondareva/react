@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import NotFoundComponent from '../pages/404';
+import { render, screen } from "@testing-library/react";
+import NotFoundComponent from "../app/not-found";
 
-test('renders NotFound component', () => {
+test("renders NotFound component", () => {
   render(<NotFoundComponent />);
-  expect(screen.getByText('404 PAGE NOT FOUND')).toBeInTheDocument();
+  expect(screen.getByText("404 PAGE NOT FOUND")).toBeInTheDocument();
 });

@@ -1,0 +1,263 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/App.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+.App_loading__4qf0_ {
+  font-size: 35px;
+  color: red;
+  z-index: 100;
+}
+
+.App_errorButton__6dVF4 {
+  width: 100px;
+  height: 50px;
+  background-color: rgb(48, 25, 25);
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 5px;
+  color: aliceblue;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.App_searchSection___R_rA {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.App_resultsWrapper__fkNUQ {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Pagination/Pagination.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+.Pagination_paginationPages__HvGDb {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding-top: 10px;
+  }
+  
+  .Pagination_paginationButton___9scK {
+    width: 70px;
+    border: 3px solid rgb(49, 5, 63);
+    background-color: rgb(204, 150, 215);
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 5px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Flyout/Flyout.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.Flyout_flyoutWrapper__A2ZBC {
+    position: fixed;
+    top: 80vh;
+    z-index: 200;
+    left: 45%;
+    border: 3px solid rgb(94, 17, 94);
+    border-radius: 5px;
+    padding: 20px;
+    color: rgb(63, 13, 13);
+    font-size: 20px;
+    transition: 1s;
+    background-color: beige;
+    display: flex;
+    gap: 10px;
+}
+
+.Flyout_flyoutButton__uPwjo {
+    width: 170px;
+    color: rgb(63, 13, 13);
+    border: 3px solid rgb(94, 17, 94);
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: rgb(221, 190, 251);
+}
+
+.Flyout_flyoutButton__uPwjo:hover {
+    background-color: rgb(35, 8, 61);
+    color: white;
+    transition: 1s;
+}
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Details/Details.module.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+.Details_detailsWrapper__TwIsa {
+    position: relative;
+}
+
+.Details_detailsContainer__LZGXu {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid brown;
+    padding: 15px;
+    gap: 5px;
+    background-color: rgb(243, 185, 185);
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.Details_detailsButton__hjXeM {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: rgb(241, 13, 13);
+}
+
+.Details_resultsInfo__MkSu8 {
+    margin: 0;
+}
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Results/Results.module.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+.Results_resultsContainer___skPH {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.Results_resultsCard__5A4fB {
+    width: 300px;
+    height: 100px;
+    display: flex;
+    border: 2px solid brown;
+    padding: 15px;
+    gap: 5px;
+    background-color: rgb(243, 185, 185);
+    align-items: center;
+    justify-content: first baseline;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 100;
+    color: rgb(69, 19, 19);
+}
+
+.Results_resultsInfo__Gw8Cu {
+    margin: 0px;
+}
+
+.Results_notFoundMessage__IiuVU {
+    font-size: 35px;
+    color: brown;
+}
+
+.Results_results__7bOOg {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.Results_resultsOverlay__pjpzd {
+    position: absolute;
+    top: -110px;
+    left: -220px;
+    width: 110vw;
+    height: 230vh;
+    z-index: -100;
+}
+
+.Results_cardCheckbox__hlEoW {
+    cursor: pointer;
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/SearchForm/SearchForm.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+.SearchForm_searchForm__DXI3_ {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    height: 20%;
+    z-index: 100;
+}
+
+.SearchForm_searchFormInput__nw_wq {
+    width: 40vw;
+    border: 3px solid rgb(63, 5, 5);
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.SearchForm_searchFormButton__emoC3 {
+    width: 100px;
+    border: 3px solid rgb(63, 5, 5);
+    background-color: rgb(230, 147, 147);
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 0.6em 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.SearchForm_searchFormButton__emoC3:hover {
+    background-color: red;
+    transition: .5s;
+    border-color: #3e0447;
+}
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Theme/Theme.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.Theme_themeButton__NsjhS {
+    width: 150px;
+    border: 3px solid rgb(63, 5, 5);
+    background-color: rgb(186, 23, 226);
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 0.6em 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 10px;
+    z-index: 100;
+}
+
+.Theme_light__tNaZx {
+    background-color: rgb(240, 232, 228);;
+    color: black;
+  }
+  
+  .Theme_dark__f4e8z {
+    background-color: black;
+    color: white;
+  }
+  
+  .Theme_dark__f4e8z p {
+    color: white;
+  }
+  
+  .Theme_dark__f4e8z section,
+  .Theme_dark__f4e8z.Theme_resultsOverlay__BUkJU {
+    background-color: black;
+  }
+  
+  .Theme_dark__f4e8z .Theme_resultsCard__7yxNb,
+  .Theme_dark__f4e8z .Theme_detailsContainer__DGj5C {
+    background-color: rgb(65, 18, 18);
+  }
+  
+  .Theme_dark__f4e8z button {
+    background-color: rgb(87, 46, 57);
+    color: azure;
+  }
+  
+  .Theme_dark__f4e8z .Theme_searchFormInput__fUU_w,
+  .Theme_dark__f4e8z .Theme_flyoutWrapper___kQOl {
+    background-color: rgb(203, 199, 199);
+  }

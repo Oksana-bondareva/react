@@ -13,3 +13,10 @@ export interface ResultItem {
 export interface ResultItems {
   data: ResultItem[];
 }
+
+export interface PeopleData {
+  results: ResultItem[];
+  count: number;
+  next: string | null;
+  previous: string | null;
+}

@@ -1,8 +1,5 @@
 {
-  "/client": "pages/client.js",
-  "/layout": "pages/layout.js",
   "/_error": "pages/_error.js",
   "/_app": "pages/_app.js",
-  "/page": "pages/page.js",
   "/_document": "pages/_document.js"
 }

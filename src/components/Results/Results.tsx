@@ -1,12 +1,14 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 import { addItem, removeItem } from "../../utils/selectedItemsSlice";
 import { RootState } from "../../common/RootReducer/rootReducer";
 import Flyout from "../Flyout/Flyout";
 import Details from "../Details/Details";
 import styles from "./Results.module.css";
-import { ResultItems } from "../../utils/interfaces";
+import { ResultItem } from "../../utils/interfaces";
 
 export type Item = {
   name: string;
@@ -20,10 +22,15 @@ export type Item = {
   url: string;
 };
 
-const Results: React.FC<
-  ResultItems & { personData: Item | null; currentPage: number }
-> = ({ data, personData }) => {
+interface ResultsProps {
+  data: ResultItem[];
+  personData: Item | null;
+  currentPage: number;
+}
+
+const Results: React.FC<ResultsProps> = ({ data, personData, currentPage }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedItems.items,
   );
@@ -31,10 +38,11 @@ const Results: React.FC<
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (router.query.id) {
-      setSelectedItemId(router.query.id as string);
+    const id = searchParams.get("id");
+    if (id) {
+      setSelectedItemId(id);
     }
-  }, [router.query.id]);
+  }, [searchParams]);
 
   const handleSelectItem = (item: Item) => {
     dispatch(addItem(item));
@@ -47,14 +55,15 @@ const Results: React.FC<
   const handleCardClick = (item: Item) => {
     const id = item.url.slice(29, item.url.lastIndexOf("/"));
     setSelectedItemId(id);
-    const searchValue = router.query.search || "";
-    const currentPage = router.query.page || 1;
+    const searchValue = searchParams.get("search") || "";
     router.push(`/?search=${searchValue}&page=${currentPage}&id=${id}`);
   };
 
   const handleCloseDetails = () => {
     setSelectedItemId(null);
-    router.push(`/?search=${router.query.search}&page=${router.query.page}`);
+    router.push(
+      `/?search=${searchParams.get("search")}&page=${searchParams.get("page")}`,
+    );
   };
 
   return (
@@ -63,7 +72,7 @@ const Results: React.FC<
         className={styles.resultsOverlay}
         onClick={() => {
           router.push(
-            `/?search=${router.query.search}&page=${router.query.page}`,
+            `/?search=${searchParams.get("search")}&page=${searchParams.get("page")}`,
           );
         }}
       ></div>

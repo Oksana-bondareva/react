@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "../RootReducer/rootReducer";
 import { apiSlice } from "../../utils/apiSlice";
-import { createWrapper } from "next-redux-wrapper";
+import { selectedItemsReducer } from "../../utils/selectedItemsSlice";
 
-export const makeStore = () =>
-  configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(apiSlice.middleware),
-  });
+export const store = configureStore({
+  reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    selectedItems: selectedItemsReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
+});
 
-export type AppDispatch = ReturnType<typeof makeStore>["dispatch"];
-export type RootState = ReturnType<typeof makeStore>["getState"];
-
-export const wrapper = createWrapper(makeStore);
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppStore = typeof store;

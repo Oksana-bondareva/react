@@ -1,23 +1,23 @@
-import { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import { wrapper } from "../common/store/Store";
 import "../globals.css";
 import { ThemeProvider } from "../components/Theme/ThemeContext";
-import type { Metadata } from "next";
+import { Providers } from "./providers";
+import { PropsWithChildren } from "react";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "React App",
 };
 
-const RootLayout = ({ Component, ...rest }: AppProps) => {
-  const { store, props } = wrapper.useWrappedStore(rest);
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <Provider store={store}>
-      <ThemeProvider>
-        <Component {...props.pageProps} />
-      </ThemeProvider>
-    </Provider>
+    <html lang="en">
+      <body>
+        <Providers>
+          <ThemeProvider>
+            <div className="wrapper">{children}</div>
+          </ThemeProvider>
+        </Providers>
+      </body>
+    </html>
   );
-};
-
-export default RootLayout;
+}

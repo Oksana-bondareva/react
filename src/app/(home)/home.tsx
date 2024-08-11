@@ -25,6 +25,7 @@ async function getPeople(searchValue = "", page = 1) {
 interface SearchParams {
   search?: string;
   page?: string;
+  id?: string;
 }
 
 interface HomeProps {
@@ -35,18 +36,27 @@ const Home = async ({ searchParams }: HomeProps) => {
   const { search = "", page = "1" } = searchParams;
   const initialData = await getPeople(search, Number(page));
 
+  let personData = null;
+  const selectedPersonId = searchParams.id;
+  if (selectedPersonId) {
+    const response = await fetch(
+      `https://swapi.dev/api/people/${selectedPersonId}/`,
+    );
+    personData = await response.json();
+  }
+
   return (
     <ThemedWrapper>
       <section className={styles.searchSection}>
         <SearchForm initialSearchValue={search} />
       </section>
       <section>
-        <div className={styles.resultWrapper}>
+        <div className={styles.resultsWrapper}>
           {initialData && initialData.results ? (
             <Results
               data={initialData.results}
               currentPage={Number(page)}
-              personData={null}
+              personData={personData}
             />
           ) : (
             <Loader />

@@ -4,18 +4,6 @@
   z-index: 100;
 }
 
-.errorButton {
-  width: 100px;
-  height: 50px;
-  background-color: rgb(48, 25, 25);
-  font-size: 18px;
-  border-radius: 5px;
-  padding: 5px;
-  color: aliceblue;
-  cursor: pointer;
-  z-index: 100;
-}
-
 .searchSection {
   display: flex;
   justify-content: space-around;

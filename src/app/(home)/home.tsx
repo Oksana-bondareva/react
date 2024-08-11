@@ -5,6 +5,8 @@ import styles from "../../App.module.css";
 import Pagination from "../../components/Pagination/Pagination";
 import ThemedWrapper from "../../components/Theme/ThemedWrapper";
 import Loader from "../../components/Loader/Loader";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import ThemeToggle from "../../components/Theme/ThemeToggle";
 
 async function getPeople(searchValue = "", page = 1) {
   const response = await fetch(
@@ -48,7 +50,9 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <ThemedWrapper>
       <section className={styles.searchSection}>
+        <ErrorBoundary />
         <SearchForm initialSearchValue={search} />
+        <ThemeToggle />
       </section>
       <section>
         <div className={styles.resultsWrapper}>

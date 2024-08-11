@@ -1,33 +1,20 @@
-import { Component } from "react";
+"use client";
+
+import { useState } from "react";
 import styles from "./ErrorBoundary.module.css";
 
-interface ErrorProps {
-  children: React.ReactNode;
-}
+const ErrorBoundary = () => {
+  const [error, setError] = useState(false);
 
-interface ErrorState {
-  getError: boolean;
-}
+  const errorButtonHandler = () => setError(true);
 
-class ErrorBoundary extends Component<ErrorProps, ErrorState> {
-  constructor(props: ErrorProps) {
-    super(props);
-    this.state = {
-      getError: false,
-    };
-  }
+  if (error) throw new Error("Oops, something went wrong...");
 
-  static getDerivedStateFromError() {
-    return { getError: true };
-  }
-
-  render() {
-    return this.state.getError ? (
-      <div className={styles.errorBoundary}>Oops, something went wrong...</div>
-    ) : (
-      this.props.children
-    );
-  }
-}
+  return (
+    <button className={styles.errorButton} onClick={errorButtonHandler}>
+      ERROR
+    </button>
+  );
+};
 
 export default ErrorBoundary;

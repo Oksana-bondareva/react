@@ -7,18 +7,6 @@
   z-index: 100;
 }
 
-.App_errorButton__6dVF4 {
-  width: 100px;
-  height: 50px;
-  background-color: rgb(48, 25, 25);
-  font-size: 18px;
-  border-radius: 5px;
-  padding: 5px;
-  color: aliceblue;
-  cursor: pointer;
-  z-index: 100;
-}
-
 .App_searchSection___R_rA {
   display: flex;
   justify-content: space-around;
@@ -30,6 +18,25 @@
   flex-direction: column;
   gap: 20px;
 }
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/ErrorBoundary/ErrorBoundary.module.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************/
+.ErrorBoundary_errorBoundary__cZ0s3 {
+    font-size: 40px;
+    color: red;
+}
+
+.ErrorBoundary_errorButton__dHoql {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(48, 25, 25);
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+    color: aliceblue;
+    cursor: pointer;
+    z-index: 100;
+  }
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Pagination/Pagination.module.css ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************/
@@ -171,7 +178,6 @@
     left: -220px;
     width: 110vw;
     height: 230vh;
-    z-index: -100;
 }
 
 .Results_cardCheckbox__hlEoW {

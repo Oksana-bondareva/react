@@ -82,6 +82,7 @@ const Results: React.FC<ResultsProps> = ({ data, personData, currentPage }) => {
             className={styles.resultsCard}
             data-testid="character-card"
             key={index}
+            role="listitem"
             onClick={() => handleCardClick(item)}
           >
             <input

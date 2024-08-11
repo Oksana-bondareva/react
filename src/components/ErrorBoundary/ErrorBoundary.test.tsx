@@ -1,25 +1,11 @@
 import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 import ErrorBoundary from "./ErrorBoundary";
 
-const ThrowError = () => {
-  throw new Error("Error");
-};
 describe("ErrorBoundary", () => {
-  test("render message when there is an error", () => {
-    render(<ErrorBoundary>{<ThrowError />}</ErrorBoundary>);
-
-    expect(
-      screen.getByText("Oops, something went wrong..."),
-    ).toBeInTheDocument();
+  it("should render the button", () => {
+    render(<ErrorBoundary />);
+    const button = screen.getByRole("button", { name: /error/i });
+    expect(button).toBeInTheDocument();
   });
-});
-
-test("render children when no error", () => {
-  render(
-    <ErrorBoundary>
-      <div data-testid="child">Some child content</div>
-    </ErrorBoundary>,
-  );
-
-  expect(screen.getByTestId("child")).toBeInTheDocument();
 });

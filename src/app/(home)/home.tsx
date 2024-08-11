@@ -8,7 +8,7 @@ import Loader from "../../components/Loader/Loader";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import ThemeToggle from "../../components/Theme/ThemeToggle";
 
-async function getPeople(searchValue = "", page = 1) {
+export async function getPeople(searchValue = "", page = 1) {
   const response = await fetch(
     `https://swapi.dev/api/people/?search=${searchValue}&page=${page}`,
     {

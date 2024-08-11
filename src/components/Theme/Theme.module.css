@@ -1,0 +1,46 @@
+.themeButton {
+    width: 120px;
+    border: 3px solid rgb(63, 5, 5);
+    background-color: rgb(186, 23, 226);
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 0.6em 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 10px;
+    z-index: 100;
+}
+
+.light {
+    background-color: rgb(240, 232, 228);;
+    color: black;
+  }
+  
+  .dark {
+    background-color: black;
+    color: white;
+  }
+  
+  .dark p {
+    color: white;
+  }
+  
+  .dark section,
+  .dark .resultsOverlay {
+    background-color: black;
+  }
+  
+  .dark .resultsCard,
+  .dark .detailsContainer {
+    background-color: rgb(65, 18, 18);
+  }
+  
+  .dark button {
+    background-color: rgb(87, 46, 57);
+    color: azure;
+  }
+  
+  .dark .searchFormInput,
+  .dark .flyoutWrapper {
+    background-color: rgb(203, 199, 199);
+  }

@@ -1,0 +1,32 @@
+.flyoutWrapper {
+    position: fixed;
+    top: 80vh;
+    z-index: 200;
+    left: 45%;
+    border: 3px solid rgb(94, 17, 94);
+    border-radius: 5px;
+    padding: 20px;
+    color: rgb(63, 13, 13);
+    font-size: 20px;
+    transition: 1s;
+    background-color: beige;
+    display: flex;
+    gap: 10px;
+}
+
+.flyoutButton {
+    width: 170px;
+    color: rgb(63, 13, 13);
+    border: 3px solid rgb(94, 17, 94);
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: rgb(221, 190, 251);
+}
+
+.flyoutButton:hover {
+    background-color: rgb(35, 8, 61);
+    color: white;
+    transition: 1s;
+}

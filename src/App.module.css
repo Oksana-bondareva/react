@@ -1,0 +1,49 @@
+.loading {
+  font-size: 35px;
+  color: red;
+  z-index: 100;
+}
+
+.errorButton {
+  width: 100px;
+  height: 50px;
+  background-color: rgb(48, 25, 25);
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 5px;
+  color: aliceblue;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.resultsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.paginationPages {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding-top: 10px;
+}
+
+.paginationButton {
+  width: 70px;
+  border: 3px solid rgb(49, 5, 63);
+  background-color: rgb(204, 150, 215);
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 5px;
+  font-weight: 500;
+  cursor: pointer;
+}

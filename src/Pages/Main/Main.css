@@ -1,0 +1,12 @@
+.main-links-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.main-link {
+    width: 150px;
+    border: 2px solid rgb(78, 15, 142);
+    padding: 5px;
+    background-color: rgb(217, 191, 241);
+}

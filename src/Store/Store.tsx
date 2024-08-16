@@ -11,7 +11,7 @@ const initialState: FormState = {
     confirmPassword: "",
     gender: "",
     terms: false,
-    picture: null,
+    picture: "",
     country: "",
   },
   uncontrolledFormData: {
@@ -22,7 +22,7 @@ const initialState: FormState = {
     confirmPassword: "",
     gender: "",
     terms: false,
-    picture: null,
+    picture: "",
     country: "",
   },
   countries: countryList,

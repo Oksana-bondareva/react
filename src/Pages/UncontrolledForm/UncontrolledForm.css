@@ -20,6 +20,8 @@
     display: flex;
     flex-direction: column;
     gap: 7px;
+    position: relative;
+    margin-bottom: 1em;
 }
 
 .input-terms-wrapper {
@@ -49,4 +51,13 @@
 .form-button:hover {
     background-color: rgb(52, 26, 76);
     transition: .5s;
+}
+
+.error-text {
+    color: rgb(211, 43, 43);
+    font-size: 12px;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    margin-top: 0.25em;
 }

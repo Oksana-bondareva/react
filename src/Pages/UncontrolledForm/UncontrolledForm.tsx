@@ -7,11 +7,14 @@ import {
 import "./UncontrolledForm.css";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { schema } from "../../utils/Validation";
+import * as yup from "yup";
+import { ValidationErrors } from "../../Modal/Interfaces";
+import { convertBase64 } from "../../utils/ConvertPicture";
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const countries = useSelector((state: RootState) => state.form.countries);
-  const [pictureBase64, setPictureBase64] = useState<string | null>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -19,11 +22,12 @@ const UncontrolledForm = () => {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
-  const countryRef = useRef<HTMLSelectElement>(null);
+  const countryRef = useRef<HTMLInputElement>(null);
   const pictureRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const formData = {
       name: nameRef.current?.value as string,
@@ -33,35 +37,42 @@ const UncontrolledForm = () => {
       confirmPassword: confirmPasswordRef.current?.value as string,
       gender: genderRef.current?.value as string,
       terms: termsRef.current?.checked as boolean,
-      picture: pictureBase64 as string,
+      picture: pictureRef.current?.files,
       country: countryRef.current?.value as string,
     };
-    dispatch(setUncontrolledFormData(formData));
-    navigate("/");
-  };
-
-  const handlePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPictureBase64(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    try {
+      await schema.validate(formData, { abortEarly: false });
+      const file = pictureRef.current?.files as FileList;
+      const base64 = await convertBase64(file[0]);
+      dispatch(setUncontrolledFormData({ ...formData, picture: base64 }));
+      setErrors({});
+      navigate("/");
+    } catch (error) {
+      if (error instanceof yup.ValidationError) {
+        const formattedErrors: ValidationErrors = {};
+        error.inner.forEach((err) => {
+          formattedErrors[err.path as keyof ValidationErrors] = err.message;
+        });
+        setErrors(formattedErrors);
+      } else {
+        console.error("Error:", error);
+      }
     }
   };
 
   return (
     <div className="form-wrapper">
       <h1 className="form-title">Please fill out the form</h1>
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit} className="form" noValidate>
         <div className="input-wrapper">
           <label htmlFor="name">Name:</label>
           <input type="text" id="name" ref={nameRef} className="input" />
+          {errors.name && <p className="error-text">{errors.name}</p>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="age">Age:</label>
           <input type="number" id="age" ref={ageRef} className="input" />
+          {errors.age && <p className="error-text">{errors.age}</p>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="email">Email:</label>
@@ -72,6 +83,7 @@ const UncontrolledForm = () => {
             className="input"
             autoComplete="new-password"
           />
+          {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="password">Password:</label>
@@ -82,6 +94,7 @@ const UncontrolledForm = () => {
             className="input"
             autoComplete="new-password"
           />
+          {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="confirmPassword">Confirm Password:</label>
@@ -92,6 +105,9 @@ const UncontrolledForm = () => {
             className="input"
             autoComplete="new-password"
           />
+          {errors.confirmPassword && (
+            <p className="error-text">{errors.confirmPassword}</p>
+          )}
         </div>
         <div className="input-wrapper">
           <label htmlFor="gender">Gender:</label>
@@ -99,29 +115,44 @@ const UncontrolledForm = () => {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+          {errors.gender && <p className="error-text">{errors.gender}</p>}
         </div>
-        <div className="input-terms-wrapper">
-          <input type="checkbox" id="terms" ref={termsRef} className="input" />
-          <label htmlFor="terms">Accept Terms and Conditions</label>
+        <div className="input-wrapper">
+          <div className="input-terms-wrapper">
+            <input
+              type="checkbox"
+              id="terms"
+              ref={termsRef}
+              className="input"
+            />
+            <label htmlFor="terms">Accept Terms and Conditions</label>
+          </div>
+          {errors.terms && <p className="error-text">{errors.terms}</p>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="picture">Upload Picture:</label>
-          <input
-            type="file"
-            id="picture"
-            ref={pictureRef}
-            onChange={handlePictureChange}
-          />
+          <input type="file" id="picture" ref={pictureRef} />
+          {errors.picture && <p className="error-text">{errors.picture}</p>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="country">Country:</label>
-          <select id="country" ref={countryRef} className="input">
+          <datalist id="countryList">
             {countries.map((country) => (
               <option key={country} value={country}>
                 {country}
               </option>
             ))}
-          </select>
+          </datalist>
+          <input
+            type="text"
+            list="countryList"
+            id="country"
+            name="country"
+            autoComplete="off"
+            ref={countryRef}
+            className="input"
+          />
+          {errors.country && <p className="error-text">{errors.country}</p>}
         </div>
         <button type="submit" className="form-button">
           Submit

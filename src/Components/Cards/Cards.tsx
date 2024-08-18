@@ -2,6 +2,7 @@ import Card from "../Card/Card";
 import { CardData } from "../../Modal/Interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store/Store";
+import "./Cards.css";
 
 export const Cards = () => {
   const cards = useSelector((state: RootState) => state.form.usersData);

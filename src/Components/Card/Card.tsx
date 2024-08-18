@@ -32,7 +32,7 @@ const Card = (props: { userCard: CardData }) => {
       </div>
       <div className="card-data-wrapper">
         <div className="card-data-title">Image:</div>
-        <img className="card-data" src={userCard.picture}></img>
+        <img className="card-data-image" src={userCard.picture}></img>
       </div>
     </div>
   );

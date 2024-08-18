@@ -1,4 +1,3 @@
-import "./ReactHookForm.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch, addData } from "../../Store/Store";
@@ -7,6 +6,7 @@ import { schema } from "../../utils/Validation";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { convertBase64 } from "../../utils/ConvertPicture";
+import { HeaderForm } from "../../Components/HeaderForm/HeaderForm";
 
 type FieldData = yup.InferType<typeof schema>;
 const ReactHookForm = () => {
@@ -36,8 +36,13 @@ const ReactHookForm = () => {
 
   return (
     <div className="form-wrapper">
-      <h1 className="form-title">Please fill out the form</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="form" noValidate>
+      <HeaderForm />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="form"
+        noValidate
+        autoComplete="off"
+      >
         <div className="input-wrapper">
           <label htmlFor="name">Name:</label>
           <input

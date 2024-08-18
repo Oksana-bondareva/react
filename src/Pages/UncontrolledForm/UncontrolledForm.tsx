@@ -7,6 +7,7 @@ import { schema } from "../../utils/Validation";
 import * as yup from "yup";
 import { ValidationErrors } from "../../Modal/Interfaces";
 import { convertBase64 } from "../../utils/ConvertPicture";
+import { HeaderForm } from "../../Components/HeaderForm/HeaderForm";
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -60,8 +61,13 @@ const UncontrolledForm = () => {
 
   return (
     <div className="form-wrapper">
-      <h1 className="form-title">Please fill out the form</h1>
-      <form onSubmit={handleSubmit} className="form" noValidate>
+      <HeaderForm />
+      <form
+        onSubmit={handleSubmit}
+        className="form"
+        noValidate
+        autoComplete="off"
+      >
         <div className="input-wrapper">
           <label htmlFor="name">Name:</label>
           <input type="text" id="name" ref={nameRef} className="input" />
@@ -74,13 +80,7 @@ const UncontrolledForm = () => {
         </div>
         <div className="input-wrapper">
           <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            ref={emailRef}
-            className="input"
-            autoComplete="new-password"
-          />
+          <input type="email" id="email" ref={emailRef} className="input" />
           {errors.email && <p className="error-text">{errors.email}</p>}
         </div>
         <div className="input-wrapper">
@@ -90,7 +90,6 @@ const UncontrolledForm = () => {
             id="password"
             ref={passwordRef}
             className="input"
-            autoComplete="new-password"
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
@@ -101,7 +100,6 @@ const UncontrolledForm = () => {
             id="confirmPassword"
             ref={confirmPasswordRef}
             className="input"
-            autoComplete="new-password"
           />
           {errors.confirmPassword && (
             <p className="error-text">{errors.confirmPassword}</p>

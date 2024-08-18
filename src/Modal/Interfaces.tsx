@@ -36,3 +36,7 @@ export interface CardData {
   picture: string;
   country: string;
 }
+
+export interface PasswordStrengthProps {
+  password: string;
+}

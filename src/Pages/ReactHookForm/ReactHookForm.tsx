@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { convertBase64 } from "../../utils/ConvertPicture";
 import { HeaderForm } from "../../Components/HeaderForm/HeaderForm";
+import PasswordStrength from "../../utils/PasswordStrength";
 
 type FieldData = yup.InferType<typeof schema>;
 const ReactHookForm = () => {
@@ -18,12 +19,14 @@ const ReactHookForm = () => {
     handleSubmit,
     getValues,
     formState: { errors },
+    watch,
   } = useForm<FieldData>({
     resolver: yupResolver<FieldData>(schema, { abortEarly: false }),
     criteriaMode: "all",
     reValidateMode: "onChange",
     mode: "all",
   });
+  const password = watch("password", "");
 
   const onSubmit: SubmitHandler<FieldData> = async (data) => {
     const file = getValues().picture as unknown as FileList;
@@ -84,6 +87,7 @@ const ReactHookForm = () => {
           {errors.password && (
             <p className="error-text">{errors.password.message}</p>
           )}
+          <PasswordStrength password={password} />
         </div>
         <div className="input-wrapper">
           <label htmlFor="confirmPassword">Confirm Password:</label>

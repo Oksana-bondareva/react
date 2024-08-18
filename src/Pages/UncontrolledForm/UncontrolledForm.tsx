@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { ValidationErrors } from "../../Modal/Interfaces";
 import { convertBase64 } from "../../utils/ConvertPicture";
 import { HeaderForm } from "../../Components/HeaderForm/HeaderForm";
+import PasswordStrength from "../../utils/PasswordStrength";
 
 const UncontrolledForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +24,7 @@ const UncontrolledForm = () => {
   const pictureRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [errors, setErrors] = useState<ValidationErrors>({});
+  const [password, setPassword] = useState<string>("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -59,6 +61,12 @@ const UncontrolledForm = () => {
     }
   };
 
+  const handlePasswordChange = () => {
+    if (passwordRef.current) {
+      setPassword(passwordRef.current.value);
+    }
+  };
+
   return (
     <div className="form-wrapper">
       <HeaderForm />
@@ -90,8 +98,10 @@ const UncontrolledForm = () => {
             id="password"
             ref={passwordRef}
             className="input"
+            onChange={handlePasswordChange}
           />
           {errors.password && <p className="error-text">{errors.password}</p>}
+          <PasswordStrength password={password} />
         </div>
         <div className="input-wrapper">
           <label htmlFor="confirmPassword">Confirm Password:</label>

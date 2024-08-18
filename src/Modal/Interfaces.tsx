@@ -6,14 +6,13 @@ export interface FormData {
   confirmPassword: string;
   gender: string;
   terms: boolean;
-  picture: string | ArrayBuffer | null;
+  picture: string;
   country: string;
 }
 
 export interface FormState {
-  uncontrolledFormData: FormData;
-  hookFormData: FormData;
   countries: string[];
+  usersData: FormData[];
 }
 
 export interface ValidationErrors {

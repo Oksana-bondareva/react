@@ -1,7 +1,7 @@
 import "./ReactHookForm.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setHookFormData, RootState, AppDispatch } from "../../Store/Store";
+import { RootState, AppDispatch, addData } from "../../Store/Store";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../utils/Validation";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,9 @@ const ReactHookForm = () => {
   const onSubmit: SubmitHandler<FieldData> = async (data) => {
     const file = getValues().picture as unknown as FileList;
     const base64 = await convertBase64(file[0]);
-    dispatch(setHookFormData({ ...data, picture: base64 }));
+    const picture = base64 ? base64.toString() : "";
+    const formData = { ...data, picture };
+    dispatch(addData(formData));
     navigate("/");
   };
 

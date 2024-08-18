@@ -1,5 +1,6 @@
 import "./Main.css";
 import { Link } from "react-router-dom";
+import { Cards } from "../../Components/Cards/Cards";
 
 const Main = () => {
   return (
@@ -12,6 +13,7 @@ const Main = () => {
           Uncontrolled Form
         </Link>
       </div>
+      <Cards />
     </div>
   );
 };

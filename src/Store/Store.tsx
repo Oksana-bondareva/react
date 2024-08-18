@@ -3,28 +3,7 @@ import { FormData, FormState } from "../Modal/Interfaces";
 import { countryList } from "../Modal/CountryList";
 
 const initialState: FormState = {
-  hookFormData: {
-    name: "",
-    age: 0,
-    email: "",
-    password: "",
-    confirmPassword: "",
-    gender: "",
-    terms: false,
-    picture: "",
-    country: "",
-  },
-  uncontrolledFormData: {
-    name: "",
-    age: 0,
-    email: "",
-    password: "",
-    confirmPassword: "",
-    gender: "",
-    terms: false,
-    picture: "",
-    country: "",
-  },
+  usersData: [],
   countries: countryList,
 };
 
@@ -32,16 +11,13 @@ const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    setHookFormData: (state, action: PayloadAction<FormData>) => {
-      state.hookFormData = action.payload;
-    },
-    setUncontrolledFormData: (state, action: PayloadAction<FormData>) => {
-      state.uncontrolledFormData = action.payload;
+    addData: (state, action: PayloadAction<FormData>) => {
+      state.usersData.push(action.payload);
     },
   },
 });
 
-export const { setHookFormData, setUncontrolledFormData } = formSlice.actions;
+export const { addData } = formSlice.actions;
 
 const store = configureStore({
   reducer: {

@@ -1,9 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AppDispatch,
-  RootState,
-  setUncontrolledFormData,
-} from "../../Store/Store";
+import { addData, AppDispatch, RootState } from "../../Store/Store";
 import "./UncontrolledForm.css";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +40,9 @@ const UncontrolledForm = () => {
       await schema.validate(formData, { abortEarly: false });
       const file = pictureRef.current?.files as FileList;
       const base64 = await convertBase64(file[0]);
-      dispatch(setUncontrolledFormData({ ...formData, picture: base64 }));
+      const picture = base64 ? base64.toString() : "";
+      const formsData = { ...formData, picture };
+      dispatch(addData(formsData));
       setErrors({});
       navigate("/");
     } catch (error) {

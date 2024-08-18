@@ -14,3 +14,8 @@
     padding: 15px;
     background-color: rgb(233, 226, 239);
   }
+
+.not-found-card {
+    color: brown;
+    font-size: 32px;
+}

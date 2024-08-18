@@ -1,0 +1,23 @@
+.card-data-wrapper {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 350px;
+    align-items: center;
+}
+
+.card-data-image {
+    width: 150px;
+    height: 150px;
+}
+
+.card-data-title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 22px;
+    color: rgb(33, 33, 63);
+}
+
+.card-data {
+    font-size: 20px;
+    color: rgb(49, 49, 109);
+}
